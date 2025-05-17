@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PairaLife - Connecting Lives, Sharing Spaces</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .quote {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--warm-beige);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(245, 239, 230, 0.85), rgba(245, 239, 230, 0.85)), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .sub-headline {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--paira-blue);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div>Paira<span>Life</span></div>
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="how-it-works/index.html" class="nav-link">How It Works</a></li>
+                    <li class="nav-item"><a href="about/about-us.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="safety-center.html" class="nav-link">Safety</a></li>
+                    <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="header-buttons">
+                <a href="login.html" class="btn btn-secondary">Sign In</a>
+                <a href="signup.html" class="btn">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Connect, Share, Thrive Together</h1>
+            <p class="sub-headline">PairaLife matches homeowners with extra space to people seeking affordable housing through compatible living arrangements.</p>
+            <div class="hero-buttons">
+                <a href="signup.html" class="btn btn-large">Find Your Match</a>
+                <a href="how-it-works/index.html" class="btn btn-secondary btn-large">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Welcome to PairaLife</h2>
+        <p>This GitHub Pages site contains a preview of the PairaLife HTML templates.</p>
+        <p>Click on the navigation links above to explore the different pages.</p>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PairaLife. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
