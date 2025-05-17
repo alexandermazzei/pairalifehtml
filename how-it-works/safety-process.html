@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Process - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(245, 239, 230, 0.85), rgba(245, 239, 230, 0.85)), url('https://images.unsplash.com/photo-1585421514738-01798e348b17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        /* Safety Features Section */
+        .safety-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .safety-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .safety-features {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .safety-feature {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .safety-feature:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .feature-content {
+            flex: 1;
+        }
+        
+        .feature-icon {
+            color: var(--success-green);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-image {
+            flex: 1;
+            max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Verification Process */
+        .verification-section {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .verification-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .verification-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .verification-step {
+            display: flex;
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            background-color: var(--paira-blue);
+            color: white;
+            font-weight: 700;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .step-details {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--paira-blue);
+        }
+        
+        /* Safety Tips */
+        .tips-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .tips-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tip-card {
+            background-color: var(--off-white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tip-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--warm-beige);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--paira-blue);
+            font-size: 1.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--paira-blue);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(30, 107, 140, 0.9), rgba(30, 107, 140, 0.9)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .cta-section h2 {
+            color: white;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            margin-top: 2rem;
+            background-color: white;
+            color: var(--paira-blue);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .safety-feature, 
+            .safety-feature:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .feature-image {
+                max-width: 100%;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-number {
+                min-width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">How It Works</a></li>
+                <li class="nav-item"><a href="../index.html#benefits" class="nav-link">Benefits</a></li>
+                <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="../about/about-us.html" class="nav-link">About</a></li>
+            </ul>
+            
+            <div class="header-buttons">
+                <a href="#" class="btn btn-secondary">Log In</a>
+                <a href="#" class="btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Safety Process</h1>
+            <p class="sub-headline">Your safety is our top priority at PairaLife</p>
+        </div>
+    </section>
+    
+    <!-- Safety Features Section -->
+    <section class="safety-section">
+        <div class="container">
+            <div class="safety-header">
+                <h2>Core Safety Features</h2>
+                <p>How we create a secure environment for everyone in our community</p>
+            </div>
+            
+            <div class="safety-features">
+                <div class="safety-feature">
+                    <div class="feature-content">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Comprehensive Verification</h3>
+                        <p>Every user on PairaLife goes through our multi-step verification process to confirm their identity and background.</p>
+                        <p>We verify government-issued IDs, email addresses, phone numbers, and conduct background screenings to ensure our community consists of trusted individuals.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="ID Verification">
+                    </div>
+                </div>
+                
+                <div class="safety-feature">
+                    <div class="feature-content">
+                        <div class="feature-icon"><i class="fas fa-comment-alt"></i></div>
+                        <h3>Secure Communication</h3>
+                        <p>Our platform features secure messaging that allows you to get to know potential matches before sharing personal contact information.</p>
+                        <p>All communications are encrypted and monitored for inappropriate content, providing a safe space to establish comfort and compatibility.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Secure Messaging">
+                    </div>
+                </div>
+                
+                <div class="safety-feature">
+                    <div class="feature-content">
+                        <div class="feature-icon"><i class="fas fa-file-contract"></i></div>
+                        <h3>Standardized Agreements</h3>
+                        <p>Our lawyer-reviewed co-living agreement templates help establish clear expectations and protect both parties legally.</p>
+                        <p>These agreements cover important aspects like rent, utilities, shared spaces, guest policies, notice periods, and conflict resolution procedures.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Legal Agreements">
+                    </div>
+                </div>
+                
+                <div class="safety-feature">
+                    <div class="feature-content">
+                        <div class="feature-icon"><i class="fas fa-hands-helping"></i></div>
+                        <h3>24/7 Support & Mediation</h3>
+                        <p>Our support team is available round-the-clock to assist with any issues that may arise during your co-living experience.</p>
+                        <p>We offer mediation services to help resolve conflicts professionally and maintain harmonious living arrangements for all parties involved.</p>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Support Team">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Verification Process -->
+    <section class="verification-section">
+        <div class="container">
+            <div class="verification-header">
+                <h2>Our Verification Process</h2>
+                <p>Every PairaLife member completes these steps before joining our community</p>
+            </div>
+            
+            <div class="verification-steps">
+                <div class="verification-step">
+                    <div class="step-number">1</div>
+                    <div class="step-details">
+                        <div class="step-title">Profile Creation & Email Verification</div>
+                        <p>Users create detailed profiles and verify their email address to ensure active communication channels.</p>
+                    </div>
+                </div>
+                
+                <div class="verification-step">
+                    <div class="step-number">2</div>
+                    <div class="step-details">
+                        <div class="step-title">Phone Number Verification</div>
+                        <p>We verify phone numbers through SMS confirmation to ensure users can be contacted when needed.</p>
+                    </div>
+                </div>
+                
+                <div class="verification-step">
+                    <div class="step-number">3</div>
+                    <div class="step-details">
+                        <div class="step-title">ID Verification</div>
+                        <p>Users submit government-issued photo ID which is verified through our secure third-party verification service.</p>
+                    </div>
+                </div>
+                
+                <div class="verification-step">
+                    <div class="step-number">4</div>
+                    <div class="step-details">
+                        <div class="step-title">Background Screening</div>
+                        <p>We conduct background checks to identify potential issues in criminal history, with transparency about what we check.</p>
+                    </div>
+                </div>
+                
+                <div class="verification-step">
+                    <div class="step-number">5</div>
+                    <div class="step-details">
+                        <div class="step-title">Reference Checks</div>
+                        <p>For added security, we may request and verify personal or professional references, especially for long-term arrangements.</p>
+                    </div>
+                </div>
+                
+                <div class="verification-step">
+                    <div class="step-number">6</div>
+                    <div class="step-details">
+                        <div class="step-title">Verification Badge</div>
+                        <p>Once all steps are completed, users receive a "Verified" badge on their profile, indicating they've passed our safety checks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Safety Tips -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="tips-header">
+                <h2>Safety Tips & Best Practices</h2>
+                <p>Recommendations to ensure a safe and positive co-living experience</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Chat First</h3>
+                    <p>Before meeting in person, have a video call to verify the person matches their profile and establish initial rapport.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Meet in Public Places</h3>
+                    <p>For initial meetings, choose public locations like cafes or parks. Inform a friend or family member about your meeting details.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Ask the Right Questions</h3>
+                    <p>We provide suggested question lists to help you learn important information about potential housemates or homeowners.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Home Visit Guidelines</h3>
+                    <p>For homeowners showing spaces, invite a friend or family member to be present during tours with new potential housemates.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Trust Your Instincts</h3>
+                    <p>If something feels wrong or uncomfortable, it's okay to step back. Your safety and comfort are the highest priority.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Protect Personal Information</h3>
+                    <p>Only share sensitive personal or financial information after you've established trust and are ready to finalize arrangements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked Safety Questions</h2>
+                <p>Common questions about safety on PairaLife</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">How extensive are your background checks?</div>
+                    <p>Our background checks include identity verification, address history, criminal records at national and county levels, sex offender registry screening, and global watchlist searches. Users are informed about the checks and must provide consent.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What happens if I have a safety concern about a user?</div>
+                    <p>We take all safety concerns seriously. You can report any suspicious activity or safety concerns through our platform, and our safety team will investigate promptly. In emergency situations, always contact local authorities first.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Are my personal details and verification documents secure?</div>
+                    <p>Yes, we use industry-standard encryption and security protocols to protect your data. Verification documents are only accessed by our verification team and our trusted third-party verification service. We never share this information with other users.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What safety features are in place for financial transactions?</div>
+                    <p>For initial payments and deposits, we offer a secure payment platform that protects both parties. We also provide guidance on safe payment methods for ongoing rent payments. Never send money to someone you haven't met in person or verified through our platform.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do you handle disputes between housemates?</div>
+                    <p>We offer a mediation service to help resolve conflicts before they escalate. Our team can facilitate discussions between parties and provide guidance based on the agreements established. We also have resources available for conflict resolution strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Safety First, Always</h2>
+                <p>Join our community knowing we've created a secure environment for intergenerational co-living.</p>
+                <a href="#" class="btn btn-large cta-button">Join PairaLife Today</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Find a Home</a></li>
+                        <li class="footer-link"><a href="#">List Your Space</a></li>
+                        <li class="footer-link"><a href="index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="../about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="../about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="../about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="../about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Help Center</a></li>
+                        <li class="footer-link"><a href="#">Safety Center</a></li>
+                        <li class="footer-link"><a href="#">Resources</a></li>
+                        <li class="footer-link"><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

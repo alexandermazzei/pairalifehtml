@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Advanced Search Page Styles */
+        .search-section {
+            padding: 2rem 0;
+        }
+        
+        .search-form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--paira-teal);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--paira-teal);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--paira-teal);
+        }
+        
+        .slider-control {
+            width: 100%;
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .multi-select-container {
+            position: relative;
+        }
+        
+        .multi-select-selected {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            cursor: pointer;
+            min-height: 48px;
+            align-items: center;
+        }
+        
+        .multi-select-tag {
+            background-color: var(--paira-blue);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
+        }
+        
+        .multi-select-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .multi-select-dropdown.active {
+            display: block;
+        }
+        
+        .multi-select-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .multi-select-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .form-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+            margin: 2rem 0;
+        }
+        
+        .form-title {
+            font-size: 1.25rem;
+            color: var(--paira-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--light-gray);
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--paira-teal);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+        
+        .toggle-label {
+            margin-left: 3.5rem;
+        }
+        
+        .selected-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .selected-option {
+            background-color: var(--light-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .option-remove {
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-menu {
+                margin-top: 1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link active">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Listing</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Advanced Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h1>Advanced Search</h1>
+            <p>Use our detailed search criteria to find your perfect match and living situation.</p>
+            
+            <div class="search-form">
+                <form action="match-results.html" method="get">
+                    <!-- Location and Basic Criteria -->
+                    <h2 class="form-title">Location & Basic Criteria</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" id="location" name="location" class="form-control" placeholder="City, neighborhood, or address" value="San Francisco, CA">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="radius" class="form-label">Search Radius</label>
+                            <select id="radius" name="radius" class="form-control">
+                                <option value="1">1 mile</option>
+                                <option value="5">5 miles</option>
+                                <option value="10" selected>10 miles</option>
+                                <option value="25">25 miles</option>
+                                <option value="50">50 miles</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="priceMin" class="form-label">Price Range</label>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <input type="number" id="priceMin" name="priceMin" class="form-control" placeholder="Min" value="800">
+                                <span>to</span>
+                                <input type="number" id="priceMax" name="priceMax" class="form-control" placeholder="Max" value="1500">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="moveInDate" class="form-label">Move-In Date</label>
+                            <input type="date" id="moveInDate" name="moveInDate" class="form-control" value="2023-10-01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Room Type</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="entirePlace" name="roomType" value="entirePlace" checked>
+                                    <label for="entirePlace">Entire Place</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="privateRoom" name="roomType" value="privateRoom" checked>
+                                    <label for="privateRoom">Private Room</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="sharedRoom" name="roomType" value="sharedRoom">
+                                    <label for="sharedRoom">Shared Room</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Duration</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="shortTerm" name="duration" value="shortTerm">
+                                    <label for="shortTerm">Short-term (< 3 months)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="mediumTerm" name="duration" value="mediumTerm" checked>
+                                    <label for="mediumTerm">Medium-term (3-6 months)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="longTerm" name="duration" value="longTerm" checked>
+                                    <label for="longTerm">Long-term (6+ months)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-divider"></div>
+                    
+                    <!-- Property Features -->
+                    <h2 class="form-title">Property Features</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Property Type</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="apartment" name="propertyType" value="apartment" checked>
+                                    <label for="apartment">Apartment</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="house" name="propertyType" value="house" checked>
+                                    <label for="house">House</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="condo" name="propertyType" value="condo" checked>
+                                    <label for="condo">Condo</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="townhouse" name="propertyType" value="townhouse">
+                                    <label for="townhouse">Townhouse</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bedrooms</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="studio" name="bedrooms" value="studio">
+                                    <label for="studio">Studio</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="oneBed" name="bedrooms" value="1" checked>
+                                    <label for="oneBed">1 Bedroom</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="twoBed" name="bedrooms" value="2" checked>
+                                    <label for="twoBed">2 Bedrooms</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="threeBed" name="bedrooms" value="3" checked>
+                                    <label for="threeBed">3+ Bedrooms</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Bathrooms</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="anyBath" name="bathrooms" value="any" checked>
+                                    <label for="anyBath">Any</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="sharedBath" name="bathrooms" value="shared">
+                                    <label for="sharedBath">Shared</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="privateBath" name="bathrooms" value="private">
+                                    <label for="privateBath">Private</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Amenities</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="wifi" name="amenities" value="wifi" checked>
+                                    <label for="wifi">Wifi</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="ac" name="amenities" value="ac" checked>
+                                    <label for="ac">Air Conditioning</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="washerDryer" name="amenities" value="washerDryer" checked>
+                                    <label for="washerDryer">Washer/Dryer</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="parking" name="amenities" value="parking">
+                                    <label for="parking">Parking</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="gym" name="amenities" value="gym">
+                                    <label for="gym">Gym</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="pool" name="amenities" value="pool">
+                                    <label for="pool">Pool</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Other Features</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="furnished" name="features" value="furnished">
+                                    <label for="furnished">Furnished</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="petFriendly" name="features" value="petFriendly">
+                                    <label for="petFriendly">Pet-friendly</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="privateEntrance" name="features" value="privateEntrance">
+                                    <label for="privateEntrance">Private Entrance</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="wheelchairAccessible" name="features" value="wheelchairAccessible">
+                                    <label for="wheelchairAccessible">Wheelchair Accessible</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-divider"></div>
+                    
+                    <!-- Roommate Preferences -->
+                    <h2 class="form-title">Roommate Preferences</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ageRange" class="form-label">Age Range</label>
+                            <div style="padding: 0 1rem;">
+                                <input type="range" id="ageMin" name="ageMin" min="18" max="80" value="25" class="slider-control" multiple>
+                                <input type="range" id="ageMax" name="ageMax" min="18" max="80" value="35" class="slider-control" multiple>
+                                <div class="range-labels">
+                                    <span>18</span>
+                                    <span id="ageRangeLabel">25-35 years</span>
+                                    <span>80+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Gender Preference</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="anyGender" name="gender" value="any" checked>
+                                    <label for="anyGender">Any</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="maleOnly" name="gender" value="male">
+                                    <label for="maleOnly">Male Only</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="femaleOnly" name="gender" value="female">
+                                    <label for="femaleOnly">Female Only</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="nonBinary" name="gender" value="nonBinary">
+                                    <label for="nonBinary">Non-binary Only</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Lifestyle</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="nonSmoker" name="lifestyle" value="nonSmoker" checked>
+                                    <label for="nonSmoker">Non-smoker</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="professional" name="lifestyle" value="professional" checked>
+                                    <label for="professional">Professional</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="student" name="lifestyle" value="student">
+                                    <label for="student">Student</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="earlyRiser" name="lifestyle" value="earlyRiser" checked>
+                                    <label for="earlyRiser">Early Riser</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="nightOwl" name="lifestyle" value="nightOwl">
+                                    <label for="nightOwl">Night Owl</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="neatTidy" name="lifestyle" value="neatTidy" checked>
+                                    <label for="neatTidy">Neat & Tidy</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="vegetarian" name="lifestyle" value="vegetarian">
+                                    <label for="vegetarian">Vegetarian/Vegan</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Interests (Select multiple)</label>
+                            <div class="multi-select-container" id="interestsContainer">
+                                <div class="multi-select-selected" id="interestsSelected">
+                                    <span class="multi-select-tag">Cooking <span class="tag-remove"><i class="fas fa-times"></i></span></span>
+                                    <span class="multi-select-tag">Reading <span class="tag-remove"><i class="fas fa-times"></i></span></span>
+                                    <span class="multi-select-tag">Travel <span class="tag-remove"><i class="fas fa-times"></i></span></span>
+                                </div>
+                                <div class="multi-select-dropdown" id="interestsDropdown">
+                                    <div class="multi-select-item">Fitness</div>
+                                    <div class="multi-select-item">Art</div>
+                                    <div class="multi-select-item">Music</div>
+                                    <div class="multi-select-item">Gaming</div>
+                                    <div class="multi-select-item">Outdoor Activities</div>
+                                    <div class="multi-select-item">Movies & TV</div>
+                                    <div class="multi-select-item">Technology</div>
+                                    <div class="multi-select-item">Cooking</div>
+                                    <div class="multi-select-item">Reading</div>
+                                    <div class="multi-select-item">Travel</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-divider"></div>
+                    
+                    <!-- Additional Preferences -->
+                    <h2 class="form-title">Additional Preferences</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Verification Level</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="verifiedEmail" name="verification" value="email" checked>
+                                    <label for="verifiedEmail">Email Verified</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="verifiedPhone" name="verification" value="phone" checked>
+                                    <label for="verifiedPhone">Phone Verified</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="verifiedID" name="verification" value="id" checked>
+                                    <label for="verifiedID">ID Verified</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="backgroundCheck" name="verification" value="background">
+                                    <label for="backgroundCheck">Background Check</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Communication Preferences</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="quickResponder" name="communication" value="quickResponder" checked>
+                                    <label for="quickResponder">Quick Responders</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="virtualTours" name="communication" value="virtualTours">
+                                    <label for="virtualTours">Offers Virtual Tours</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="inPersonMeetings" name="communication" value="inPersonMeetings">
+                                    <label for="inPersonMeetings">Open to In-Person Meetings</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Special Requirements</label>
+                            <textarea class="form-control" id="specialRequirements" name="specialRequirements" rows="3" placeholder="Enter any specific needs or requirements..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Search Options</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="saveSearch" name="saveSearch" value="true" checked>
+                                    <label for="saveSearch">Save this search</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="emailAlerts" name="emailAlerts" value="true" checked>
+                                    <label for="emailAlerts">Email me when new matches are found</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Reset Filters</button>
+                        <button type="submit" class="btn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="#">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Help Center</a></li>
+                        <li class="footer-link"><a href="#">Safety Center</a></li>
+                        <li class="footer-link"><a href="#">Resources</a></li>
+                        <li class="footer-link"><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Interests dropdown toggle
+        const interestsSelected = document.getElementById('interestsSelected');
+        const interestsDropdown = document.getElementById('interestsDropdown');
+        
+        interestsSelected.addEventListener('click', function(e) {
+            e.stopPropagation();
+            interestsDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            interestsDropdown.classList.remove('active');
+        });
+        
+        // Interest tag removal
+        const tagRemoveButtons = document.querySelectorAll('.tag-remove');
+        
+        tagRemoveButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.closest('.multi-select-tag').remove();
+            });
+        });
+        
+        // Add new interest tag
+        const interestItems = document.querySelectorAll('.multi-select-item');
+        
+        interestItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const interestText = this.textContent;
+                const interestTag = document.createElement('span');
+                interestTag.className = 'multi-select-tag';
+                interestTag.innerHTML = `${interestText} <span class="tag-remove"><i class="fas fa-times"></i></span>`;
+                
+                // Check if interest already exists
+                const existingTags = document.querySelectorAll('.multi-select-tag');
+                let exists = false;
+                
+                existingTags.forEach(tag => {
+                    if (tag.textContent.includes(interestText)) {
+                        exists = true;
+                    }
+                });
+                
+                if (!exists) {
+                    interestsSelected.appendChild(interestTag);
+                    
+                    // Add event listener to the new tag's remove button
+                    const newTagRemove = interestTag.querySelector('.tag-remove');
+                    newTagRemove.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        this.closest('.multi-select-tag').remove();
+                    });
+                }
+                
+                interestsDropdown.classList.remove('active');
+            });
+        });
+        
+        // Age range slider
+        const ageMin = document.getElementById('ageMin');
+        const ageMax = document.getElementById('ageMax');
+        const ageRangeLabel = document.getElementById('ageRangeLabel');
+        
+        function updateAgeRange() {
+            const min = parseInt(ageMin.value);
+            const max = parseInt(ageMax.value);
+            
+            if (min > max) {
+                ageMax.value = min;
+            }
+            
+            ageRangeLabel.textContent = `${ageMin.value}-${ageMax.value} years`;
+        }
+        
+        ageMin.addEventListener('input', updateAgeRange);
+        ageMax.addEventListener('input', updateAgeRange);
+    </script>
+</body>
+</html> 

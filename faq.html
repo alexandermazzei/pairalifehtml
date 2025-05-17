@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* FAQ Specific Styles */
+        .faq-hero {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .faq-section {
+            padding: 2rem 0;
+        }
+        
+        .faq-section-title {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--paira-teal);
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-question {
+            padding: 1rem 0;
+            cursor: pointer;
+            position: relative;
+            font-weight: 600;
+            color: var(--paira-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding-bottom: 1rem;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-category-btn {
+            padding: 0.5rem 1rem;
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-category-btn.active {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .search-section {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--paira-blue);
+            cursor: pointer;
+        }
+        
+        .contact-cta {
+            background-color: var(--warm-beige);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .faq-container {
+                margin-top: -30px;
+                padding: 1.5rem;
+            }
+            
+            .faq-categories {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- FAQ Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about PairaLife</p>
+        </div>
+    </section>
+    
+    <!-- FAQ Content -->
+    <div class="container">
+        <div class="faq-container">
+            <!-- Search Bar -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search FAQs...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="all">All Questions</button>
+                <button class="faq-category-btn" data-category="account">Account</button>
+                <button class="faq-category-btn" data-category="matching">Matching</button>
+                <button class="faq-category-btn" data-category="payments">Payments</button>
+                <button class="faq-category-btn" data-category="safety">Safety</button>
+                <button class="faq-category-btn" data-category="hosting">Hosting</button>
+            </div>
+            
+            <!-- Getting Started Section -->
+            <div class="faq-section" id="getting-started">
+                <h2 class="faq-section-title">Getting Started</h2>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>How do I create an account?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To create an account, click on the "Sign Up" button in the top-right corner of the homepage. You'll need to provide your email address, create a password, and verify your email. After that, you'll be guided through the profile creation process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>What information do I need to create my profile?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To create your profile, you'll need to provide basic information about yourself, such as your name, age, and location. You'll also need to answer questions about your lifestyle, habits, and preferences to help our matching algorithm find compatible co-living arrangements. Adding a profile photo and a brief bio is also recommended to make your profile more appealing.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>Can I use PairaLife without creating an account?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can browse some basic information about PairaLife without creating an account. However, to access the platform's core features, such as viewing listings, contacting potential matches, and setting up your own listing, you'll need to create an account and complete your profile.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Finding Matches Section -->
+            <div class="faq-section" id="finding-matches">
+                <h2 class="faq-section-title">Finding Matches</h2>
+                
+                <div class="faq-item" data-category="matching">
+                    <div class="faq-question">
+                        <span>How does the matching algorithm work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our matching algorithm considers multiple factors to find compatible living arrangements. These factors include lifestyle preferences, habits, interests, location preferences, budget, and specific requirements you've specified. The algorithm assigns a compatibility score to potential matches based on how well your preferences align, helping you find people you're likely to get along with in a shared living situation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="matching">
+                    <div class="faq-question">
+                        <span>Can I filter my search results?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can filter your search results based on various criteria such as location, price range, available amenities, move-in date, duration of stay, and more. Advanced search options are available to help you find exactly what you're looking for.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="matching">
+                    <div class="faq-question">
+                        <span>How do I contact a potential match?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once you find a potential match, you can send them a message through our secure messaging system. Click on the "Contact" or "Message" button on their profile or listing. Your initial message should introduce yourself and express your interest in their listing or profile. Remember to be respectful and provide relevant information about yourself.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payments & Billing Section -->
+            <div class="faq-section" id="payments-billing">
+                <h2 class="faq-section-title">Payments & Billing</h2>
+                
+                <div class="faq-item" data-category="payments">
+                    <div class="faq-question">
+                        <span>What are the subscription options?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer three subscription tiers: Basic, Premium, and Pro. Each tier offers different features and benefits:</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li><strong>Basic Plan ($9.99/month):</strong> Access to basic matching, limited property views, and email support.</li>
+                            <li><strong>Premium Plan ($19.99/month):</strong> Unlimited property views, advanced matching algorithm, priority messaging, and 24/7 support.</li>
+                            <li><strong>Pro Plan ($29.99/month):</strong> All Premium features plus background verification, dedicated concierge service, and early access to new listings.</li>
+                        </ul>
+                        <p>You can view the full details and pricing of each subscription on our Pricing page or in your Account Settings.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="payments">
+                    <div class="faq-question">
+                        <span>How do I change or cancel my subscription?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To change or cancel your subscription, go to your Account Settings and select the "Subscription" tab. From there, you can upgrade, downgrade, or cancel your subscription. If you cancel, your subscription will remain active until the end of your current billing period, after which you'll be downgraded to the free tier with limited functionality.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="payments">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept major credit and debit cards (Visa, Mastercard, American Express), PayPal, and bank transfers in some regions. All payment information is securely processed and stored using industry-standard encryption.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Safety & Security Section -->
+            <div class="faq-section" id="safety-security">
+                <h2 class="faq-section-title">Safety & Security</h2>
+                
+                <div class="faq-item" data-category="safety">
+                    <div class="faq-question">
+                        <span>Is my personal information safe?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we take data privacy very seriously. Your personal information is encrypted and stored securely. We only share your information with other users according to your privacy settings, and we never sell your data to third parties. You can learn more in our Privacy Policy.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="safety">
+                    <div class="faq-question">
+                        <span>How does the verification process work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our verification process includes several steps:</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li><strong>Email verification:</strong> Confirming your email address.</li>
+                            <li><strong>Phone verification:</strong> Verifying your phone number with a code.</li>
+                            <li><strong>ID verification:</strong> Uploading a government-issued ID, which is checked by our secure verification partner.</li>
+                        </ul>
+                        <p>This multi-step verification helps create a trusted community where everyone is who they say they are.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="safety">
+                    <div class="faq-question">
+                        <span>What safety measures does PairaLife provide?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>PairaLife implements several safety measures to protect our users:</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li>Secure in-platform messaging that doesn't reveal personal contact information until you're ready to share it.</li>
+                            <li>User verification processes to confirm identities.</li>
+                            <li>Review system to build trust and accountability.</li>
+                            <li>Safety guidelines and resources for meeting potential roommates.</li>
+                            <li>24/7 support team to address any concerns.</li>
+                            <li>Option to report suspicious behavior or users.</li>
+                        </ul>
+                        <p>Visit our Safety Center for more information about staying safe while using PairaLife.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hosting Section -->
+            <div class="faq-section" id="hosting">
+                <h2 class="faq-section-title">Hosting</h2>
+                
+                <div class="faq-item" data-category="hosting">
+                    <div class="faq-question">
+                        <span>How do I list my space?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To list your space, click on "List Your Space" in the navigation menu. You'll be guided through the process of creating your listing, which includes providing details about your property, available rooms, amenities, house rules, and preferred roommate characteristics. You'll also need to set your pricing, availability, and upload photos of your space.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="hosting">
+                    <div class="faq-question">
+                        <span>What should I include in my listing?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A great listing should include:</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li>Clear, high-quality photos of all rooms, especially the available space.</li>
+                            <li>Detailed description of the property, the available room, and shared spaces.</li>
+                            <li>Information about the neighborhood, nearby amenities, and transportation options.</li>
+                            <li>House rules and expectations for potential roommates.</li>
+                            <li>Details about current occupants (age range, professions, lifestyles).</li>
+                            <li>Accurate pricing information and any additional costs (utilities, internet, etc.).</li>
+                        </ul>
+                        <p>Being honest and thorough in your listing helps attract compatible roommates.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="hosting">
+                    <div class="faq-question">
+                        <span>How do I screen potential roommates?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To screen potential roommates effectively:</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li>Review their profile for compatibility with your lifestyle and preferences.</li>
+                            <li>Check if they have verified their identity through our verification process.</li>
+                            <li>Review any ratings or reviews from previous roommates or hosts.</li>
+                            <li>Ask relevant questions through our messaging system.</li>
+                            <li>Schedule a video chat before meeting in person.</li>
+                            <li>If possible, arrange an in-person meeting or property viewing.</li>
+                        </ul>
+                        <p>Trust your instincts and only proceed if you feel comfortable with the potential match.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="contact-cta">
+                <h3>Didn't Find Your Answer?</h3>
+                <p>Our support team is ready to help you with any questions or concerns</p>
+                <a href="contact-support.html" class="btn">Contact Support</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="#">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="#">Resources</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // FAQ questions toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    this.querySelector('i').classList.replace('fa-chevron-up', 'fa-chevron-down');
+                } else {
+                    answer.style.display = 'block';
+                    this.querySelector('i').classList.replace('fa-chevron-down', 'fa-chevron-up');
+                }
+            });
+        });
+        
+        // Category filtering
+        const categoryButtons = document.querySelectorAll('.faq-category-btn');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchButton = document.querySelector('.search-button');
+        
+        function searchFAQs() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                // If search is empty, show all items based on current category filter
+                const activeCategory = document.querySelector('.faq-category-btn.active').getAttribute('data-category');
+                
+                faqItems.forEach(item => {
+                    if (activeCategory === 'all' || item.getAttribute('data-category') === activeCategory) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                return;
+            }
+            
+            faqItems.forEach(item => {
+                const questionText = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        searchButton.addEventListener('click', searchFAQs);
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchFAQs();
+            }
+        });
+    </script>
+</body>
+</html> 

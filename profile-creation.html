@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Profile Creation */
+        .profile-section {
+            padding: 2rem 0;
+            background-color: white;
+        }
+        
+        .profile-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .progress-sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+        
+        .progress-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--paira-blue);
+        }
+        
+        .progress-steps {
+            list-style: none;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .progress-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 12px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background-color: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .progress-step.completed:not(:last-child)::after {
+            background-color: var(--success-green);
+        }
+        
+        .step-number {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+        
+        .progress-step.active .step-number {
+            background-color: var(--paira-blue);
+        }
+        
+        .progress-step.completed .step-number {
+            background-color: var(--success-green);
+        }
+        
+        .progress-step.completed .step-number::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+        
+        .step-content {
+            padding-top: 2px;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--warm-gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .progress-step.active .step-title {
+            color: var(--paira-blue);
+            font-weight: 700;
+        }
+        
+        .step-subtitle {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            opacity: 0.8;
+        }
+        
+        .main-form {
+            flex: 1;
+        }
+        
+        .form-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-section-title {
+            font-size: 1.25rem;
+            color: var(--paira-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--paira-teal);
+            box-shadow: 0 0 0 2px rgba(43, 181, 176, 0.2);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            margin-top: 0.5rem;
+        }
+        
+        .avatar-upload {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .avatar-controls {
+            flex: 1;
+        }
+        
+        .avatar-details {
+            margin-bottom: 1rem;
+        }
+        
+        .avatar-details h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .avatar-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            width: calc(50% - 0.5rem);
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+        
+        .range-slider {
+            margin-top: 1rem;
+        }
+        
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .textarea-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .interest-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .interest-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: rgba(43, 181, 176, 0.1);
+            border: 1px solid rgba(43, 181, 176, 0.3);
+            border-radius: 4px;
+            color: var(--paira-teal);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .interest-tag:hover {
+            background-color: rgba(43, 181, 176, 0.2);
+        }
+        
+        .interest-tag.selected {
+            background-color: var(--paira-teal);
+            color: white;
+        }
+        
+        .interest-tag i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .progress-sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .progress-steps {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .progress-step {
+                flex-direction: column;
+                align-items: center;
+                margin-right: 1rem;
+                min-width: 80px;
+            }
+            
+            .progress-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .step-content {
+                text-align: center;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-option {
+                width: 100%;
+            }
+            
+            .avatar-upload {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .avatar-controls {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .avatar-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-menu {
+                margin-top: 1rem;
+            }
+            
+            .form-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Listing</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Profile Creation Section -->
+    <section class="profile-section">
+        <div class="container profile-container">
+            <!-- Progress Sidebar -->
+            <div class="progress-sidebar">
+                <h3 class="progress-title">Profile Completion</h3>
+                <ul class="progress-steps">
+                    <li class="progress-step completed">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Basic Info</div>
+                            <div class="step-subtitle">Personal details</div>
+                        </div>
+                    </li>
+                    <li class="progress-step active">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">About You</div>
+                            <div class="step-subtitle">Bio & interests</div>
+                        </div>
+                    </li>
+                    <li class="progress-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Preferences</div>
+                            <div class="step-subtitle">Living preferences</div>
+                        </div>
+                    </li>
+                    <li class="progress-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Photos</div>
+                            <div class="step-subtitle">Add lifestyle photos</div>
+                        </div>
+                    </li>
+                    <li class="progress-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Verification</div>
+                            <div class="step-subtitle">Identity verification</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Form -->
+            <div class="main-form">
+                <h1>Tell Us About Yourself</h1>
+                <p>Help potential co-living matches get to know you better! This information will be visible on your profile.</p>
+                
+                <div class="form-card">
+                    <div class="form-section">
+                        <h3 class="form-section-title">Profile Picture</h3>
+                        <div class="avatar-upload">
+                            <div class="avatar-preview">
+                                <img src="https://via.placeholder.com/150x150" alt="Profile Preview">
+                            </div>
+                            <div class="avatar-controls">
+                                <div class="avatar-details">
+                                    <h4>Upload Profile Photo</h4>
+                                    <p>Choose a clear photo of your face. This helps build trust in the community.</p>
+                                    <p class="form-hint">Recommended: Square image, at least 300x300 pixels, JPG or PNG format</p>
+                                </div>
+                                <div class="avatar-buttons">
+                                    <button class="btn">Upload Photo</button>
+                                    <button class="btn btn-secondary">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="form-section-title">About You</h3>
+                        <div class="form-group">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea id="bio" class="form-input textarea-input" placeholder="Tell potential matches about yourself, your lifestyle, and what you're looking for in a co-living situation..."></textarea>
+                            <p class="form-hint">Minimum 50 characters. Be authentic and highlight what makes you a great co-living match.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Occupation</label>
+                            <div class="form-grid">
+                                <div>
+                                    <input type="text" class="form-input" placeholder="Your job title">
+                                </div>
+                                <div>
+                                    <input type="text" class="form-input" placeholder="Company/Organization (optional)">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Education</label>
+                            <div class="form-grid">
+                                <div>
+                                    <input type="text" class="form-input" placeholder="School/University">
+                                </div>
+                                <div>
+                                    <input type="text" class="form-input" placeholder="Degree/Field of Study (optional)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="form-section-title">Interests & Lifestyle</h3>
+                        <div class="form-group">
+                            <label class="form-label">Select your interests (choose up to 10)</label>
+                            <p class="form-hint">This helps match you with people who share similar interests</p>
+                            
+                            <div class="interest-tags">
+                                <div class="interest-tag"><i class="fas fa-utensils"></i>Cooking</div>
+                                <div class="interest-tag selected"><i class="fas fa-hiking"></i>Hiking</div>
+                                <div class="interest-tag selected"><i class="fas fa-book"></i>Reading</div>
+                                <div class="interest-tag"><i class="fas fa-film"></i>Movies</div>
+                                <div class="interest-tag"><i class="fas fa-music"></i>Music</div>
+                                <div class="interest-tag"><i class="fas fa-palette"></i>Art</div>
+                                <div class="interest-tag"><i class="fas fa-gamepad"></i>Gaming</div>
+                                <div class="interest-tag selected"><i class="fas fa-plane"></i>Travel</div>
+                                <div class="interest-tag"><i class="fas fa-dog"></i>Pets</div>
+                                <div class="interest-tag"><i class="fas fa-dumbbell"></i>Fitness</div>
+                                <div class="interest-tag"><i class="fas fa-bicycle"></i>Cycling</div>
+                                <div class="interest-tag"><i class="fas fa-laptop-code"></i>Technology</div>
+                                <div class="interest-tag"><i class="fas fa-tree"></i>Gardening</div>
+                                <div class="interest-tag"><i class="fas fa-camera"></i>Photography</div>
+                                <div class="interest-tag"><i class="fas fa-running"></i>Running</div>
+                                <div class="interest-tag"><i class="fas fa-guitar"></i>Playing Music</div>
+                                <div class="interest-tag"><i class="fas fa-chess"></i>Board Games</div>
+                                <div class="interest-tag"><i class="fas fa-paint-brush"></i>DIY</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Lifestyle</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="early-riser">
+                                    <label for="early-riser">Early Riser</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="night-owl">
+                                    <label for="night-owl">Night Owl</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="introvert">
+                                    <label for="introvert">Introvert</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="extrovert">
+                                    <label for="extrovert">Extrovert</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="neat" checked>
+                                    <label for="neat">Neat & Tidy</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="relaxed">
+                                    <label for="relaxed">Relaxed About Cleaning</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="smoker">
+                                    <label for="smoker">Smoker</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="non-smoker" checked>
+                                    <label for="non-smoker">Non-Smoker</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="clean-habits" class="form-label">Cleanliness Level</label>
+                            <input type="range" id="clean-habits" min="1" max="5" value="4" class="range-slider">
+                            <div class="range-values">
+                                <span>Relaxed</span>
+                                <span>Moderate</span>
+                                <span>Very Neat</span>
+                            </div>
+                            <p class="form-hint">How important is cleanliness to you in shared spaces?</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="social-level" class="form-label">Sociability Level</label>
+                            <input type="range" id="social-level" min="1" max="5" value="3" class="range-slider">
+                            <div class="range-values">
+                                <span>Private</span>
+                                <span>Balanced</span>
+                                <span>Very Social</span>
+                            </div>
+                            <p class="form-hint">How much social interaction do you prefer with housemates?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <a href="dashboard.html" class="btn btn-secondary">Save & Exit</a>
+                        <a href="#" class="btn">Continue to Living Preferences</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Find a Home</a></li>
+                        <li class="footer-link"><a href="#">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Help Center</a></li>
+                        <li class="footer-link"><a href="#">Safety Center</a></li>
+                        <li class="footer-link"><a href="#">Resources</a></li>
+                        <li class="footer-link"><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Interest tag selection
+        const interestTags = document.querySelectorAll('.interest-tag');
+        
+        interestTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                
+                // Count selected tags
+                const selectedTags = document.querySelectorAll('.interest-tag.selected');
+                
+                // If more than 10 selected, deselect the current one
+                if (selectedTags.length > 10 && this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    alert('You can select up to 10 interests');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

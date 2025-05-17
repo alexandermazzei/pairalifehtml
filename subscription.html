@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Management - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        .btn-danger {
+            background-color: var(--error-red);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c62828;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Subscription Page Styles */
+        .subscription-page {
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .subscription-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .subscription-sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .subscription-nav {
+            list-style: none;
+        }
+        
+        .subscription-nav-item {
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .subscription-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .subscription-nav-link:hover {
+            background-color: var(--off-white);
+            color: var(--paira-blue);
+        }
+        
+        .subscription-nav-link.active {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .subscription-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .subscription-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-green);
+        }
+        
+        .subscription-details {
+            margin-bottom: 2rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .detail-label {
+            width: 30%;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .detail-value {
+            width: 70%;
+        }
+        
+        .plan-section {
+            margin-bottom: 2rem;
+        }
+        
+        .plan-title {
+            margin-bottom: 1.5rem;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .plan-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .plan-card:hover {
+            border-color: var(--paira-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plan-card.active {
+            border-color: var(--paira-blue);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .current-plan-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--paira-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .plan-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(30, 107, 140, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--paira-blue);
+            font-size: 1.5rem;
+        }
+        
+        .plan-name {
+            margin-bottom: 0.5rem;
+            color: var(--paira-blue);
+        }
+        
+        .plan-price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--warm-gray);
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-feature {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-icon {
+            color: var(--success-green);
+            font-size: 0.875rem;
+        }
+        
+        .payment-section {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-title {
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-method {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--paira-blue);
+        }
+        
+        .payment-method.active {
+            border-color: var(--paira-blue);
+            background-color: rgba(30, 107, 140, 0.05);
+        }
+        
+        .payment-method-icon {
+            width: 40px;
+            height: 25px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .payment-method-details {
+            flex: 1;
+        }
+        
+        .payment-method-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .payment-method-info {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+        }
+        
+        .payment-method-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .action-link {
+            color: var(--paira-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .action-link:hover {
+            background-color: rgba(30, 107, 140, 0.1);
+        }
+        
+        .billing-history {
+            margin-bottom: 2rem;
+        }
+        
+        .billing-title {
+            margin-bottom: 1.5rem;
+        }
+        
+        .billing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .billing-table th {
+            padding: 0.75rem;
+            background-color: var(--light-gray);
+            text-align: left;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .billing-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .cancel-section {
+            background-color: rgba(229, 57, 53, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .cancel-title {
+            color: var(--error-red);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .subscription-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+            }
+            
+            .detail-label, .detail-value {
+                width: 100%;
+            }
+            
+            .detail-label {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Subscription Management Page -->
+    <section class="subscription-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Subscription Management</h1>
+                <p>Manage your subscription plan, payment methods, and billing history.</p>
+            </div>
+            
+            <div class="subscription-grid">
+                <!-- Sidebar Navigation -->
+                <div class="subscription-sidebar">
+                    <ul class="subscription-nav">
+                        <li class="subscription-nav-item">
+                            <a href="#" class="subscription-nav-link active">
+                                <i class="fas fa-home"></i>
+                                <span>Subscription Overview</span>
+                            </a>
+                        </li>
+                        <li class="subscription-nav-item">
+                            <a href="#" class="subscription-nav-link">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Payment Methods</span>
+                            </a>
+                        </li>
+                        <li class="subscription-nav-item">
+                            <a href="#" class="subscription-nav-link">
+                                <i class="fas fa-receipt"></i>
+                                <span>Billing History</span>
+                            </a>
+                        </li>
+                        <li class="subscription-nav-item">
+                            <a href="#" class="subscription-nav-link">
+                                <i class="fas fa-file-invoice"></i>
+                                <span>Invoices</span>
+                            </a>
+                        </li>
+                        <li class="subscription-nav-item">
+                            <a href="#" class="subscription-nav-link">
+                                <i class="fas fa-cog"></i>
+                                <span>Preferences</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="subscription-content">
+                    <!-- Content Header -->
+                    <div class="content-header">
+                        <h2>Subscription Overview</h2>
+                        <div class="subscription-status status-active">Active</div>
+                    </div>
+                    
+                    <!-- Subscription Details -->
+                    <div class="subscription-details">
+                        <div class="detail-row">
+                            <div class="detail-label">Current Plan</div>
+                            <div class="detail-value">Premium Plan</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Subscription Start</div>
+                            <div class="detail-value">January 15, 2023</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Next Billing Date</div>
+                            <div class="detail-value">August 15, 2023</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Billing Cycle</div>
+                            <div class="detail-value">Monthly</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Amount</div>
+                            <div class="detail-value">$19.99 per month</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Payment Method</div>
+                            <div class="detail-value">Visa ending in 4242</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Plans Section -->
+                    <div class="plan-section">
+                        <h3 class="plan-title">Available Plans</h3>
+                        
+                        <div class="plans-grid">
+                            <!-- Basic Plan -->
+                            <div class="plan-card">
+                                <div class="plan-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4 class="plan-name">Basic Plan</h4>
+                                <div class="plan-price">$9.99 <span>/month</span></div>
+                                <ul class="plan-features">
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>10 property views per day</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Basic match recommendations</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Email support</span>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn btn-secondary">Select Plan</a>
+                            </div>
+                            
+                            <!-- Premium Plan (Current) -->
+                            <div class="plan-card active">
+                                <div class="current-plan-badge">Current</div>
+                                <div class="plan-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <h4 class="plan-name">Premium Plan</h4>
+                                <div class="plan-price">$19.99 <span>/month</span></div>
+                                <ul class="plan-features">
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Unlimited property views</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Advanced match algorithm</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Priority messaging</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>24/7 phone support</span>
+                                    </li>
+                                </ul>
+                                <span class="btn" style="background-color: #ddd; cursor: default;">Current Plan</span>
+                            </div>
+                            
+                            <!-- Pro Plan -->
+                            <div class="plan-card">
+                                <div class="plan-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h4 class="plan-name">Pro Plan</h4>
+                                <div class="plan-price">$29.99 <span>/month</span></div>
+                                <ul class="plan-features">
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>All Premium features</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Background verification</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Dedicated concierge</span>
+                                    </li>
+                                    <li class="plan-feature">
+                                        <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                        <span>Early access to new listings</span>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn">Upgrade</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Method Section -->
+                    <div class="payment-section">
+                        <h3 class="payment-title">Payment Methods</h3>
+                        
+                        <div class="payment-methods">
+                            <!-- Visa Card -->
+                            <div class="payment-method active">
+                                <div class="payment-method-icon">
+                                    <i class="fab fa-cc-visa"></i>
+                                </div>
+                                <div class="payment-method-details">
+                                    <div class="payment-method-name">Visa Card</div>
+                                    <div class="payment-method-info">**** **** **** 4242</div>
+                                </div>
+                                <div class="payment-method-actions">
+                                    <a href="#" class="action-link">Edit</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Add New Payment Method -->
+                            <div class="payment-method">
+                                <div class="payment-method-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="payment-method-details">
+                                    <div class="payment-method-name">Add Payment Method</div>
+                                    <div class="payment-method-info">Credit card, bank account, etc.</div>
+                                </div>
+                                <div class="payment-method-actions">
+                                    <a href="#" class="action-link">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Billing History -->
+                    <div class="billing-history">
+                        <h3 class="billing-title">Recent Billing History</h3>
+                        
+                        <table class="billing-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>July 15, 2023</td>
+                                    <td>Premium Plan - Monthly Subscription</td>
+                                    <td>$19.99</td>
+                                    <td>Paid</td>
+                                    <td><a href="invoice.html" class="action-link">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>June 15, 2023</td>
+                                    <td>Premium Plan - Monthly Subscription</td>
+                                    <td>$19.99</td>
+                                    <td>Paid</td>
+                                    <td><a href="#" class="action-link">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>May 15, 2023</td>
+                                    <td>Premium Plan - Monthly Subscription</td>
+                                    <td>$19.99</td>
+                                    <td>Paid</td>
+                                    <td><a href="#" class="action-link">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Cancel Subscription Section -->
+                    <div class="cancel-section">
+                        <h3 class="cancel-title">Cancel Subscription</h3>
+                        <p>Canceling your subscription will immediately stop your access to premium features. Your subscription will remain active until the end of your current billing period.</p>
+                        <button class="btn btn-danger" id="cancelSubscription">Cancel Subscription</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="#">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="#">Resources</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Sidebar navigation
+        const navLinks = document.querySelectorAll('.subscription-nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // In a real app, this would load the appropriate content section
+                alert('In a real application, this would load the ' + this.querySelector('span').textContent + ' section.');
+            });
+        });
+        
+        // Plan selection
+        const planButtons = document.querySelectorAll('.plan-card .btn:not([style])');
+        
+        planButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('You would be directed to plan change confirmation screen.');
+            });
+        });
+        
+        // Payment method actions
+        const paymentActions = document.querySelectorAll('.payment-method-actions .action-link');
+        
+        paymentActions.forEach(action => {
+            action.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (this.textContent.trim() === 'Edit') {
+                    alert('Payment method edit form would appear here.');
+                } else if (this.textContent.trim() === 'Add') {
+                    alert('Add payment method form would appear here.');
+                }
+            });
+        });
+        
+        // Cancel subscription
+        const cancelButton = document.getElementById('cancelSubscription');
+        
+        cancelButton.addEventListener('click', function() {
+            if (confirm('Are you sure you want to cancel your subscription? You will lose access to premium features at the end of your current billing period.')) {
+                alert('Your subscription has been canceled. You will receive a confirmation email shortly.');
+            }
+        });
+    </script>
+</body>
+</html>
