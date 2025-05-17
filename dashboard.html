@@ -782,55 +782,55 @@
             <div class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link active">
+                        <a href="dashboard.html" class="sidebar-link active">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="profile-edit.html" class="sidebar-link">
                             <i class="fas fa-user"></i>
                             <span>My Profile</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="messages.html" class="sidebar-link">
                             <i class="fas fa-envelope"></i>
                             <span>Messages</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="browse-listings.html" class="sidebar-link">
                             <i class="fas fa-search"></i>
                             <span>Find a Match</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="create-listing.html" class="sidebar-link">
                             <i class="fas fa-home"></i>
                             <span>My Listings</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="saved-matches.html" class="sidebar-link">
                             <i class="fas fa-heart"></i>
                             <span>Saved Matches</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <i class="fas fa-file-contract"></i>
-                            <span>Agreements</span>
+                        <a href="calendar.html" class="sidebar-link">
+                            <i class="fas fa-calendar"></i>
+                            <span>Calendar</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="payment-methods.html" class="sidebar-link">
                             <i class="fas fa-credit-card"></i>
                             <span>Payments</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="account-settings.html" class="sidebar-link">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
@@ -882,7 +882,7 @@
                 <div class="dashboard-card">
                     <div class="dashboard-card-header">
                         <h3>Complete Your Profile</h3>
-                        <a href="#" class="btn">Edit Profile</a>
+                        <a href="profile-edit.html" class="btn">Edit Profile</a>
                     </div>
                     
                     <div class="profile-completion">
@@ -956,7 +956,7 @@
                 <div class="dashboard-card">
                     <div class="dashboard-card-header">
                         <h3>Recent Activity</h3>
-                        <a href="#" class="btn btn-secondary">View All</a>
+                        <a href="notifications.html" class="btn btn-secondary">View All</a>
                     </div>
                     
                     <div class="section-tabs">
@@ -977,7 +977,7 @@
                                 <div class="notification-time">15 minutes ago</div>
                             </div>
                             <div class="notification-actions">
-                                <a href="#" class="btn">Reply</a>
+                                <a href="messages.html" class="btn">Reply</a>
                             </div>
                         </li>
                         
@@ -991,7 +991,7 @@
                                 <div class="notification-time">2 hours ago</div>
                             </div>
                             <div class="notification-actions">
-                                <a href="#" class="btn">View Profile</a>
+                                <a href="match-results.html" class="btn">View Profile</a>
                             </div>
                         </li>
                         
@@ -1005,7 +1005,7 @@
                                 <div class="notification-time">1 day ago</div>
                             </div>
                             <div class="notification-actions">
-                                <a href="#" class="btn">Verify Now</a>
+                                <a href="verification.html" class="btn">Verify Now</a>
                             </div>
                         </li>
                         
@@ -1019,10 +1019,73 @@
                                 <div class="notification-time">2 days ago</div>
                             </div>
                             <div class="notification-actions">
-                                <a href="#" class="btn">Reply</a>
+                                <a href="messages.html" class="btn">Reply</a>
                             </div>
                         </li>
                     </ul>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 class="card-title">Profile</h3>
+                        <p class="card-description">Manage your personal information</p>
+                        <p>Update your profile information, preferences, and account settings.</p>
+                        <a href="profile-edit.html" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="card-title">Listings</h3>
+                        <p class="card-description">Manage your property listings</p>
+                        <p>Create, edit, or manage your property listings and availability.</p>
+                        <a href="create-listing.html" class="btn btn-primary">Create Listing</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <h3 class="card-title">Calendar</h3>
+                        <p class="card-description">View your schedule</p>
+                        <p>Check your upcoming bookings and availability status.</p>
+                        <a href="calendar.html" class="btn btn-primary">View Calendar</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="card-title">Messages</h3>
+                        <p class="card-description">Communication center</p>
+                        <p>Chat with your matches and coordinate arrangements.</p>
+                        <a href="messages.html" class="btn btn-primary">View Messages</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="card-title">Reviews</h3>
+                        <p class="card-description">Manage your reputation</p>
+                        <p>View and manage reviews you've received and given.</p>
+                        <a href="manage-reviews.html" class="btn btn-primary">View Reviews</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 class="card-title">Payments</h3>
+                        <p class="card-description">Financial management</p>
+                        <p>View your transaction history and manage payment methods.</p>
+                        <a href="payment-methods.html" class="btn btn-primary">Manage Payments</a>
+                    </div>
                 </div>
             </div>
         </div>
