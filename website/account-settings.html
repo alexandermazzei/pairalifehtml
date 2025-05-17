@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        .btn-danger {
+            background-color: var(--error-red);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c62828;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Account Settings */
+        .settings-section {
+            padding: 2rem 0;
+            background-color: white;
+        }
+        
+        .settings-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            gap: 0.75rem;
+        }
+        
+        .sidebar-link:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .sidebar-link.active {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .settings-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .settings-card-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .settings-card-header h3 {
+            margin-bottom: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--paira-teal);
+            box-shadow: 0 0 0 2px rgba(43, 181, 176, 0.2);
+        }
+        
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            margin-top: 0.5rem;
+        }
+        
+        .form-group-inline {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-group-inline .form-group {
+            flex: 1;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--light-gray);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--paira-teal);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-info {
+            flex: 1;
+        }
+        
+        .setting-title {
+            font-weight: 600;
+            color: var(--warm-gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .setting-description {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            opacity: 0.8;
+        }
+        
+        .setting-control {
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        
+        .linked-account {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .linked-account:last-child {
+            border-bottom: none;
+        }
+        
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            color: var(--warm-gray);
+            font-size: 1.25rem;
+        }
+        
+        .account-info {
+            flex: 1;
+        }
+        
+        .account-title {
+            font-weight: 600;
+            color: var(--warm-gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .account-status {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            opacity: 0.8;
+        }
+        
+        .card-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-green);
+        }
+        
+        .badge-warning {
+            background-color: rgba(255, 180, 0, 0.1);
+            color: var(--warning-yellow);
+        }
+        
+        .danger-zone {
+            background-color: rgba(229, 57, 53, 0.05);
+            border: 1px solid rgba(229, 57, 53, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .danger-zone-header {
+            color: var(--error-red);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-color: var(--light-gray);
+            margin: 2rem 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .settings-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .form-group-inline {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-menu {
+                margin-top: 1rem;
+            }
+            
+            .settings-card {
+                padding: 1.5rem;
+            }
+            
+            .settings-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .setting-control {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Listing</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Account Settings Section -->
+    <section class="settings-section">
+        <div class="container settings-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="dashboard.html" class="sidebar-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="profile-creation.html" class="sidebar-link">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="verification.html" class="sidebar-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Verification</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="account-settings.html" class="sidebar-link active">
+                            <i class="fas fa-cog"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <h1>Account Settings</h1>
+                <p>Manage your account preferences, security settings, and connected services.</p>
+                
+                <!-- Account Information -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Account Information</h3>
+                        <button class="btn btn-secondary">Save Changes</button>
+                    </div>
+                    
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" class="form-input" value="John">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" class="form-input" value="Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-input" value="john.doe@example.com">
+                        <p class="form-hint">This email is used for login and communications.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input" value="(555) 123-4567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" id="location" class="form-input" value="San Francisco, CA">
+                    </div>
+                </div>
+                
+                <!-- Security Settings -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Security</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="current-password" class="form-label">Current Password</label>
+                        <input type="password" id="current-password" class="form-input" placeholder="Enter your current password">
+                    </div>
+                    
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="new-password" class="form-label">New Password</label>
+                            <input type="password" id="new-password" class="form-input" placeholder="Enter new password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password" class="form-label">Confirm New Password</label>
+                            <input type="password" id="confirm-password" class="form-input" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                    
+                    <p class="form-hint">Password must be at least 8 characters with a number and special character.</p>
+                    
+                    <button class="btn">Update Password</button>
+                    
+                    <hr class="section-divider">
+                    
+                    <h4>Two-Factor Authentication</h4>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Enable Two-Factor Authentication</div>
+                            <div class="setting-description">Add an extra layer of security to your account by requiring a verification code in addition to your password.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notification Settings -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Notification Preferences</h3>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Email Notifications</div>
+                            <div class="setting-description">Receive emails about new messages, matches, and important account updates.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">SMS Notifications</div>
+                            <div class="setting-description">Receive text messages for time-sensitive updates and alerts.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">New Match Alerts</div>
+                            <div class="setting-description">Get notified when you have new potential matches.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Marketing Communications</div>
+                            <div class="setting-description">Receive updates about new features, offers, and community events.</div>
+                        </div>
+                        <div class="setting-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Connected Accounts -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Connected Accounts</h3>
+                    </div>
+                    
+                    <p>Link your social accounts for easier login and enhanced features.</p>
+                    
+                    <div class="linked-account">
+                        <div class="account-icon" style="background-color: #4285F4; color: white;">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="account-info">
+                            <div class="account-title">Google</div>
+                            <div class="account-status">
+                                <span class="card-badge badge-success">Connected</span>
+                                <span>johndoe@gmail.com</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary">Disconnect</button>
+                    </div>
+                    
+                    <div class="linked-account">
+                        <div class="account-icon" style="background-color: #3b5998; color: white;">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="account-info">
+                            <div class="account-title">Facebook</div>
+                            <div class="account-status">Not connected</div>
+                        </div>
+                        <button class="btn btn-secondary">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Privacy Settings -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Privacy Settings</h3>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Profile Visibility</div>
+                            <div class="setting-description">Control who can see your profile on PairaLife.</div>
+                        </div>
+                        <div class="setting-control">
+                            <select class="form-input">
+                                <option value="public">Public - Everyone can see</option>
+                                <option value="matches" selected>Matches Only - Only shown to potential matches</option>
+                                <option value="invite">Invite Only - Only those you approve</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Location Sharing</div>
+                            <div class="setting-description">Control how your location is shown to others.</div>
+                        </div>
+                        <div class="setting-control">
+                            <select class="form-input">
+                                <option value="precise">Precise Location</option>
+                                <option value="approximate" selected>Approximate Area</option>
+                                <option value="city">City Only</option>
+                                <option value="none">Don't Show</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Danger Zone -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3 class="danger-zone-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Danger Zone</span>
+                        </h3>
+                    </div>
+                    
+                    <div class="danger-zone">
+                        <h4>Deactivate Account</h4>
+                        <p>Temporarily deactivate your account. You can reactivate at any time by logging in.</p>
+                        <button class="btn btn-secondary">Deactivate Account</button>
+                        
+                        <hr class="section-divider">
+                        
+                        <h4>Delete Account</h4>
+                        <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                        <button class="btn btn-danger">Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Availability Settings - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Availability Page Styles */
+        .availability-page {
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .settings-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(30, 107, 140, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--paira-blue);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .calendar-day.available {
+            background-color: rgba(43, 181, 176, 0.1);
+            border-color: var(--paira-teal);
+            color: var(--paira-teal);
+        }
+        
+        .calendar-day.unavailable {
+            background-color: rgba(229, 57, 53, 0.1);
+            border-color: var(--error-red);
+            color: var(--error-red);
+            text-decoration: line-through;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .time-slot {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .time-slot.selected {
+            background-color: var(--paira-teal);
+            color: white;
+            border-color: var(--paira-teal);
+        }
+        
+        .time-slot:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin: 1rem 0;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link active">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Availability Settings Page -->
+    <section class="availability-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Availability Settings</h1>
+                <p>Manage your availability for property viewings and meetings with potential matches.</p>
+            </div>
+            
+            <div class="settings-container">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>General Availability</h3>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Available Days</label>
+                        <div class="form-check">
+                            <input type="checkbox" id="monday" checked>
+                            <label for="monday">Monday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="tuesday" checked>
+                            <label for="tuesday">Tuesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="wednesday" checked>
+                            <label for="wednesday">Wednesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="thursday" checked>
+                            <label for="thursday">Thursday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="friday" checked>
+                            <label for="friday">Friday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="saturday">
+                            <label for="saturday">Saturday</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="sunday">
+                            <label for="sunday">Sunday</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Default Time Slots</label>
+                        <div class="time-slots">
+                            <div class="time-slot">9:00 AM</div>
+                            <div class="time-slot">10:00 AM</div>
+                            <div class="time-slot selected">11:00 AM</div>
+                            <div class="time-slot selected">12:00 PM</div>
+                            <div class="time-slot">1:00 PM</div>
+                            <div class="time-slot selected">2:00 PM</div>
+                            <div class="time-slot selected">3:00 PM</div>
+                            <div class="time-slot">4:00 PM</div>
+                            <div class="time-slot">5:00 PM</div>
+                            <div class="time-slot">6:00 PM</div>
+                            <div class="time-slot">7:00 PM</div>
+                            <div class="time-slot">8:00 PM</div>
+                        </div>
+                        <p><small>Click on time slots to toggle availability</small></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notice Period</label>
+                        <select class="form-control">
+                            <option>No notice required</option>
+                            <option>At least 1 hour in advance</option>
+                            <option selected>At least 3 hours in advance</option>
+                            <option>At least 6 hours in advance</option>
+                            <option>At least 12 hours in advance</option>
+                            <option>At least 24 hours in advance</option>
+                            <option>At least 2 days in advance</option>
+                            <option>At least 1 week in advance</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Maximum Bookings Per Day</label>
+                        <select class="form-control">
+                            <option>No limit</option>
+                            <option>1 booking per day</option>
+                            <option selected>2 bookings per day</option>
+                            <option>3 bookings per day</option>
+                            <option>4 bookings per day</option>
+                            <option>5 bookings per day</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="settings-container">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <h3>Custom Date Settings</h3>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Select Month</label>
+                        <select class="form-control">
+                            <option>September 2023</option>
+                            <option selected>October 2023</option>
+                            <option>November 2023</option>
+                            <option>December 2023</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="calendar-header">Sun</div>
+                        <div class="calendar-header">Mon</div>
+                        <div class="calendar-header">Tue</div>
+                        <div class="calendar-header">Wed</div>
+                        <div class="calendar-header">Thu</div>
+                        <div class="calendar-header">Fri</div>
+                        <div class="calendar-header">Sat</div>
+                        
+                        <div class="calendar-day">1</div>
+                        <div class="calendar-day available">2</div>
+                        <div class="calendar-day available">3</div>
+                        <div class="calendar-day available">4</div>
+                        <div class="calendar-day available">5</div>
+                        <div class="calendar-day available">6</div>
+                        <div class="calendar-day">7</div>
+                        
+                        <div class="calendar-day">8</div>
+                        <div class="calendar-day available">9</div>
+                        <div class="calendar-day available">10</div>
+                        <div class="calendar-day unavailable">11</div>
+                        <div class="calendar-day available">12</div>
+                        <div class="calendar-day available">13</div>
+                        <div class="calendar-day">14</div>
+                        
+                        <div class="calendar-day">15</div>
+                        <div class="calendar-day available">16</div>
+                        <div class="calendar-day available">17</div>
+                        <div class="calendar-day available">18</div>
+                        <div class="calendar-day available">19</div>
+                        <div class="calendar-day available">20</div>
+                        <div class="calendar-day">21</div>
+                        
+                        <div class="calendar-day">22</div>
+                        <div class="calendar-day available">23</div>
+                        <div class="calendar-day available">24</div>
+                        <div class="calendar-day available">25</div>
+                        <div class="calendar-day unavailable">26</div>
+                        <div class="calendar-day unavailable">27</div>
+                        <div class="calendar-day">28</div>
+                        
+                        <div class="calendar-day">29</div>
+                        <div class="calendar-day available">30</div>
+                        <div class="calendar-day available">31</div>
+                    </div>
+                    
+                    <p><small>Click on dates to mark as available or unavailable. Default settings apply to all available dates.</small></p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Unavailable Date Range</label>
+                        <div class="form-check">
+                            <input type="checkbox" id="vacation">
+                            <label for="vacation">I'll be away or unavailable for a period of time</label>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label class="form-label">From</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">To</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="settings-container">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Integration Settings</h3>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Calendar Integration</label>
+                        <div class="form-check">
+                            <input type="checkbox" id="google-calendar" checked>
+                            <label for="google-calendar">Sync with Google Calendar</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="outlook-calendar">
+                            <label for="outlook-calendar">Sync with Outlook Calendar</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="apple-calendar">
+                            <label for="apple-calendar">Sync with Apple Calendar</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notification Preferences</label>
+                        <div class="form-check">
+                            <input type="checkbox" id="email-notification" checked>
+                            <label for="email-notification">Email notifications for new booking requests</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="sms-notification" checked>
+                            <label for="sms-notification">SMS notifications for new booking requests</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="reminder-notification" checked>
+                            <label for="reminder-notification">Reminder 1 hour before scheduled meetings</label>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Toggle time slots
+        const timeSlots = document.querySelectorAll('.time-slot');
+        
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+        
+        // Toggle calendar days
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        
+        calendarDays.forEach(day => {
+            if (day.textContent.trim() !== '') {
+                day.addEventListener('click', function() {
+                    this.classList.toggle('available');
+                    this.classList.toggle('unavailable');
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

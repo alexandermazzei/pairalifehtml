@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Ratings - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Ratings page specific styles */
+        .ratings-page {
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .user-profile-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-details {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+        }
+        
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--sage-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+        
+        .overall-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .rating-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--paira-blue);
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 0.25rem;
+            color: var(--warning-yellow);
+            font-size: 1.25rem;
+        }
+        
+        .rating-summary {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+        
+        .rating-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .rating-category {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .category-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .category-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--paira-blue);
+            margin-bottom: 0;
+        }
+        
+        .category-score {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--paira-blue);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--paira-teal);
+            border-radius: 4px;
+        }
+        
+        .category-description {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+        }
+        
+        .rating-breakdown {
+            margin-top: 2rem;
+        }
+        
+        .breakdown-heading {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .breakdown-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .breakdown-filter {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            background-color: white;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .breakdown-filter:hover {
+            border-color: var(--paira-blue);
+        }
+        
+        .breakdown-filter.active {
+            background-color: var(--paira-blue);
+            color: white;
+            border-color: var(--paira-blue);
+        }
+        
+        .breakdown-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .breakdown-label {
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .breakdown-bar {
+            flex: 1;
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+        
+        .breakdown-bar-fill {
+            height: 100%;
+            background-color: var(--paira-teal);
+            border-radius: 4px;
+        }
+        
+        .breakdown-count {
+            font-size: 0.875rem;
+            width: 50px;
+            text-align: right;
+        }
+        
+        .review-samples {
+            margin-top: 2rem;
+        }
+        
+        .review-samples-heading {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-all-link {
+            color: var(--paira-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .review-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-date {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-meta {
+                justify-content: center;
+            }
+            
+            .overall-rating {
+                justify-content: center;
+            }
+            
+            .breakdown-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .breakdown-filters {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content Section -->
+    <section class="ratings-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>User Ratings & Reviews</h1>
+                <p>View your overall ratings and reviews from other users.</p>
+            </div>
+            
+            <!-- User Profile Card -->
+            <div class="user-profile-card">
+                <div class="profile-image">
+                    <img src="https://via.placeholder.com/150x150" alt="John Doe">
+                </div>
+                
+                <div class="profile-details">
+                    <h2 class="profile-name">John Doe</h2>
+                    
+                    <div class="profile-meta">
+                        <div class="profile-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>San Francisco, CA</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>Member since January 2022</span>
+                        </div>
+                        <div class="profile-meta-item">
+                            <i class="fas fa-home"></i>
+                            <span>12 Stays Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-verification">
+                        <span class="verification-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Identity Verified</span>
+                        </span>
+                        <span class="verification-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Email Verified</span>
+                        </span>
+                        <span class="verification-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Phone Verified</span>
+                        </span>
+                    </div>
+                    
+                    <div class="overall-rating">
+                        <div class="rating-number">4.8</div>
+                        <div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-summary">Based on 23 reviews</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rating Categories -->
+            <div class="rating-details">
+                <div class="rating-category">
+                    <div class="category-heading">
+                        <h3 class="category-name">Cleanliness</h3>
+                        <div class="category-score">4.9</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 98%;"></div>
+                    </div>
+                    <p class="category-description">How clean you keep shared spaces and your personal area.</p>
+                </div>
+                
+                <div class="rating-category">
+                    <div class="category-heading">
+                        <h3 class="category-name">Communication</h3>
+                        <div class="category-score">4.7</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%;"></div>
+                    </div>
+                    <p class="category-description">How effectively you communicate with roommates and hosts.</p>
+                </div>
+                
+                <div class="rating-category">
+                    <div class="category-heading">
+                        <h3 class="category-name">Reliability</h3>
+                        <div class="category-score">4.8</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 96%;"></div>
+                    </div>
+                    <p class="category-description">How dependable you are with payments and other commitments.</p>
+                </div>
+                
+                <div class="rating-category">
+                    <div class="category-heading">
+                        <h3 class="category-name">Respectfulness</h3>
+                        <div class="category-score">5.0</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <p class="category-description">How respectful you are of others' privacy and property.</p>
+                </div>
+            </div>
+            
+            <!-- Rating Breakdown -->
+            <div class="rating-breakdown">
+                <div class="breakdown-heading">
+                    <h3>Rating Breakdown</h3>
+                    
+                    <div class="breakdown-filters">
+                        <div class="breakdown-filter active">All Reviews</div>
+                        <div class="breakdown-filter">Roommate</div>
+                        <div class="breakdown-filter">Host</div>
+                        <div class="breakdown-filter">Guest</div>
+                    </div>
+                </div>
+                
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>5</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill" style="width: 70%;"></div>
+                    </div>
+                    <div class="breakdown-count">16</div>
+                </div>
+                
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>4</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill" style="width: 22%;"></div>
+                    </div>
+                    <div class="breakdown-count">5</div>
+                </div>
+                
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>3</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill" style="width: 9%;"></div>
+                    </div>
+                    <div class="breakdown-count">2</div>
+                </div>
+                
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>2</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="breakdown-count">0</div>
+                </div>
+                
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>1</span>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="breakdown-count">0</div>
+                </div>
+            </div>
+            
+            <!-- Review Samples -->
+            <div class="review-samples">
+                <div class="review-samples-heading">
+                    <h3>Recent Reviews</h3>
+                    <a href="manage-reviews.html" class="view-all-link">
+                        <span>View All Reviews</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Review Card 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <div class="review-avatar">
+                                <img src="https://via.placeholder.com/50x50" alt="User Avatar">
+                            </div>
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <p>Roommate</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="review-date">June 15, 2023</div>
+                        </div>
+                    </div>
+                    
+                    <p>"John was an exceptional roommate. Always respectful of shared spaces, quiet during late hours, and incredibly clean. We developed a great friendship over the months, and I appreciate his thoughtfulness in everyday interactions."</p>
+                </div>
+                
+                <!-- Review Card 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <div class="review-avatar">
+                                <img src="https://via.placeholder.com/50x50" alt="User Avatar">
+                            </div>
+                            <div>
+                                <h4>Michael Torres</h4>
+                                <p>Host</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-date">May 2, 2023</div>
+                        </div>
+                    </div>
+                    
+                    <p>"John was a great guest who took excellent care of my home. Communication was smooth throughout his stay, and he left the place in perfect condition. I'd be happy to host him again anytime."</p>
+                </div>
+                
+                <!-- Review Card 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <div class="review-avatar">
+                                <img src="https://via.placeholder.com/50x50" alt="User Avatar">
+                            </div>
+                            <div>
+                                <h4>Emma Wilson</h4>
+                                <p>Roommate</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="review-date">March 20, 2023</div>
+                        </div>
+                    </div>
+                    
+                    <p>"John is a friendly and considerate roommate overall. He's respectful of privacy and keeps common areas tidy. There were a few instances of loud music late at night, and occasionally dishes would pile up, but after we talked about it, things improved."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Filter buttons
+        const filterButtons = document.querySelectorAll('.breakdown-filter');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all filters
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked filter
+                this.classList.add('active');
+                
+                // In a real application, this would update the displayed reviews
+                console.log(`Filter selected: ${this.textContent.trim()}`);
+            });
+        });
+    </script>
+</body>
+</html> 

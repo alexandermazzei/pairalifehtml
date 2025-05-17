@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Center - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Safety Center Specific Styles */
+        .safety-hero {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .safety-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .safety-card {
+            border-bottom: 1px solid var(--light-gray);
+            padding: 1.5rem 0;
+        }
+        
+        .safety-card:last-child {
+            border-bottom: none;
+        }
+        
+        .safety-card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(30, 107, 140, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .safety-feature {
+            background-color: var(--off-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .safety-feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background-color: rgba(43, 181, 176, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        .warning-signs {
+            background-color: rgba(247, 147, 76, 0.1);
+            border-left: 4px solid var(--sunset-orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-signs h3 {
+            color: var(--sunset-orange);
+        }
+        
+        .warning-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .warning-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .emergency-contact {
+            background-color: rgba(229, 57, 53, 0.1);
+            border-left: 4px solid var(--error-red);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .emergency-contact h3 {
+            color: var(--error-red);
+        }
+        
+        .tips-section {
+            margin: 2rem 0;
+        }
+        
+        .tips-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tips-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .tips-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+        }
+        
+        .report-issue {
+            background-color: var(--warm-beige);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+        
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            margin-right: 0.5rem;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: -2px;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--paira-blue);
+            color: var(--paira-blue);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .safety-container {
+                margin-top: -30px;
+                padding: 1.5rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .tab {
+                margin-bottom: 0.5rem;
+                border-bottom: 1px solid var(--light-gray);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Safety Hero Section -->
+    <section class="safety-hero">
+        <div class="container">
+            <h1>Safety Center</h1>
+            <p>Your safety is our top priority. Learn about our safety measures and get tips for secure co-living.</p>
+        </div>
+    </section>
+    
+    <!-- Safety Content -->
+    <div class="container">
+        <div class="safety-container">
+            <div class="safety-intro">
+                <p>At PairaLife, we're committed to creating a safe and trusted community for all users. Our Safety Center provides resources, tips, and guidelines to help you stay safe while using our platform to find co-living arrangements.</p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="safety-features">Our Safety Features</div>
+                    <div class="tab" data-tab="meeting-tips">Meeting Safely</div>
+                    <div class="tab" data-tab="online-safety">Online Safety</div>
+                    <div class="tab" data-tab="scam-prevention">Avoiding Scams</div>
+                </div>
+                
+                <div id="safety-features" class="tab-content active">
+                    <h2>How We Keep You Safe</h2>
+                    <p>PairaLife has implemented several safety features to protect our users:</p>
+                    
+                    <div class="safety-grid">
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <h3>User Verification</h3>
+                            <p>We verify users' identities through multiple methods including email, phone, and ID verification.</p>
+                        </div>
+                        
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                            <h3>Secure Messaging</h3>
+                            <p>Our in-platform messaging system protects your personal contact information until you're ready to share it.</p>
+                        </div>
+                        
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Review System</h3>
+                            <p>Our two-way review system builds trust and helps users make informed decisions.</p>
+                        </div>
+                        
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Secure Payments</h3>
+                            <p>All financial transactions are securely processed with industry-standard encryption.</p>
+                        </div>
+                        
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <h3>Reporting System</h3>
+                            <p>Easily report suspicious users, messages, or listings to our safety team.</p>
+                        </div>
+                        
+                        <div class="safety-feature">
+                            <div class="safety-feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3>24/7 Support</h3>
+                            <p>Our support team is available around the clock to address any safety concerns.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="meeting-tips" class="tab-content">
+                    <h2>Meeting Potential Roommates Safely</h2>
+                    <p>Meeting potential roommates in person is an important step in finding the right co-living arrangement. Here are some tips to stay safe:</p>
+                    
+                    <div class="tips-section">
+                        <h3>Before Meeting</h3>
+                        <ul class="tips-list">
+                            <li>Get to know the person through the PairaLife messaging system first</li>
+                            <li>Check their profile verification status and reviews</li>
+                            <li>Schedule a video chat before meeting in person</li>
+                            <li>Research the property and neighborhood online</li>
+                            <li>Share your meeting plans with a friend or family member</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tips-section">
+                        <h3>During the Meeting</h3>
+                        <ul class="tips-list">
+                            <li>Meet in a public place first, especially for initial meetings</li>
+                            <li>Bring a friend or family member with you if visiting a property</li>
+                            <li>Visit properties during daylight hours</li>
+                            <li>Trust your instincts—if something feels off, leave</li>
+                            <li>Keep your personal information private until you feel comfortable</li>
+                            <li>Take photos of the property (with permission) to review later</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tips-section">
+                        <h3>After the Meeting</h3>
+                        <ul class="tips-list">
+                            <li>Take time to reflect before making any decisions</li>
+                            <li>Verify any claims made about the property or roommates</li>
+                            <li>Get all agreements in writing before making any payments</li>
+                            <li>Report any concerns to PairaLife immediately</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-signs">
+                        <h3>Warning Signs to Watch For</h3>
+                        <ul class="warning-list">
+                            <li>Requests for payment before you've seen the property or met in person</li>
+                            <li>Pressure to make an immediate decision</li>
+                            <li>Unwillingness to meet in person or do a video call</li>
+                            <li>Inconsistent or vague information about the property</li>
+                            <li>Requests for unnecessary personal information</li>
+                            <li>Prices that seem too good to be true</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="online-safety" class="tab-content">
+                    <h2>Staying Safe Online</h2>
+                    <p>Protecting your information online is crucial. Follow these guidelines to maintain your privacy and security while using PairaLife:</p>
+                    
+                    <div class="safety-card">
+                        <div class="safety-card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Protect Your Personal Information</h3>
+                        <p>Be cautious about what personal information you share in your profile and in messages. Never share your financial information, full address, or identification documents until you've established trust.</p>
+                    </div>
+                    
+                    <div class="safety-card">
+                        <div class="safety-card-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Create a Strong Password</h3>
+                        <p>Use a unique, strong password for your PairaLife account. Enable two-factor authentication for an extra layer of security.</p>
+                    </div>
+                    
+                    <div class="safety-card">
+                        <div class="safety-card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Keep Communication on the Platform</h3>
+                        <p>Keep communications within PairaLife's messaging system until you're ready to meet. This allows us to monitor for suspicious activity and protect your personal contact information.</p>
+                    </div>
+                    
+                    <div class="safety-card">
+                        <div class="safety-card-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Be Mindful of Social Media</h3>
+                        <p>Consider what information about yourself is publicly available on social media, and adjust your privacy settings accordingly. Be cautious when linking social media accounts to your PairaLife profile.</p>
+                    </div>
+                </div>
+                
+                <div id="scam-prevention" class="tab-content">
+                    <h2>Recognizing and Avoiding Scams</h2>
+                    <p>Unfortunately, housing scams exist. Here's how to recognize and avoid them:</p>
+                    
+                    <div class="tips-section">
+                        <h3>Common Rental Scams</h3>
+                        <ul class="tips-list">
+                            <li>Listings with prices significantly below market value</li>
+                            <li>Requests for wire transfers, cryptocurrency, or payment apps that don't offer protection</li>
+                            <li>Claiming to be out of town and unable to show the property</li>
+                            <li>Asking for rent or deposit before signing a lease or meeting</li>
+                            <li>Fake property listings scraped from other websites</li>
+                            <li>Creating a false sense of urgency ("many other interested parties")</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tips-section">
+                        <h3>How to Protect Yourself</h3>
+                        <ul class="tips-list">
+                            <li>Always see the property in person before paying</li>
+                            <li>Research the property address online</li>
+                            <li>Check if the listing appears on multiple sites with different contact information</li>
+                            <li>Verify the property owner through tax records if possible</li>
+                            <li>Get a proper lease agreement before making any payments</li>
+                            <li>Use secure payment methods and get receipts</li>
+                            <li>Be wary of landlords who don't ask for background information</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-signs">
+                        <h3>Red Flags</h3>
+                        <p>Be especially cautious if you encounter any of these red flags:</p>
+                        <ul class="warning-list">
+                            <li>The person refuses to meet in person or do a video call</li>
+                            <li>They claim to be traveling or overseas and can't show you the property</li>
+                            <li>They ask for personal financial information early in the conversation</li>
+                            <li>The listing has poor grammar or spelling errors</li>
+                            <li>They pressure you to make a quick decision</li>
+                            <li>They offer special deals if you pay upfront</li>
+                            <li>They claim to have had a sudden emergency requiring immediate funds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="emergency-contact">
+                <h3>Emergency Contacts</h3>
+                <p>If you're in an emergency situation, please contact your local emergency services:</p>
+                <p><strong>Emergency Services:</strong> 911 (US)</p>
+                <p><strong>PairaLife Safety Line:</strong> 1-800-SAFE-LIVE (Available 24/7)</p>
+                <p><strong>Report Suspicious Activity:</strong> safety@pairalife.com</p>
+            </div>
+            
+            <div class="report-issue">
+                <h3>Report a Safety Concern</h3>
+                <p>If you've encountered any suspicious activity or safety concerns while using PairaLife, please report it immediately.</p>
+                <a href="contact-support.html" class="btn">Report an Issue</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Tabs functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs and tab contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show the corresponding tab content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 

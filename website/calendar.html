@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Calendar Page Specific Styles */
+        .calendar-page {
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1.5rem;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .calendar-types {
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-type {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .calendar-type:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .calendar-type.active {
+            background-color: rgba(30, 107, 140, 0.1);
+            color: var(--paira-blue);
+            font-weight: 600;
+        }
+        
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .bookings-dot {
+            background-color: var(--paira-blue);
+        }
+        
+        .availability-dot {
+            background-color: var(--sage-green);
+        }
+        
+        .tours-dot {
+            background-color: var(--sunset-orange);
+        }
+        
+        .property-dot {
+            background-color: var(--paira-teal);
+        }
+        
+        .my-listings {
+            margin-bottom: 2rem;
+        }
+        
+        .listing-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .listing-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .listing-item.active {
+            background-color: rgba(30, 107, 140, 0.1);
+            color: var(--paira-blue);
+            font-weight: 600;
+        }
+        
+        .listing-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: var(--paira-blue);
+        }
+        
+        .upcoming-events {
+            margin-top: 2rem;
+        }
+        
+        .event-item {
+            padding: 0.75rem;
+            border-left: 3px solid var(--paira-blue);
+            background-color: rgba(30, 107, 140, 0.05);
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 0.75rem;
+        }
+        
+        .event-date {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--paira-blue);
+        }
+        
+        .event-with {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .event-user {
+            font-weight: 600;
+        }
+        
+        .event-item.tour {
+            border-left-color: var(--sunset-orange);
+            background-color: rgba(247, 147, 76, 0.05);
+        }
+        
+        .event-item.tour .event-title {
+            color: var(--sunset-orange);
+        }
+        
+        .event-item.booking {
+            border-left-color: var(--sage-green);
+            background-color: rgba(125, 179, 125, 0.05);
+        }
+        
+        .event-item.booking .event-title {
+            color: var(--sage-green);
+        }
+        
+        .main-calendar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calendar-period {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--paira-blue);
+        }
+        
+        .calendar-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .calendar-control {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-control:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .calendar-view-options {
+            display: flex;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .calendar-view-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-view-option:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .calendar-view-option.active {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            padding: 0.5rem;
+            font-weight: 600;
+            color: var(--warm-gray);
+        }
+        
+        .calendar-day {
+            min-height: 100px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            padding: 0.5rem;
+            position: relative;
+        }
+        
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calendar-day.other-month {
+            background-color: #f9f9f9;
+            color: #aaa;
+        }
+        
+        .calendar-day.today {
+            background-color: rgba(30, 107, 140, 0.05);
+            border-color: var(--paira-blue);
+        }
+        
+        .calendar-day.today .day-number {
+            color: var(--paira-blue);
+        }
+        
+        .day-events {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .day-event {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+        
+        .day-event.booking {
+            background-color: rgba(30, 107, 140, 0.1);
+            color: var(--paira-blue);
+        }
+        
+        .day-event.tour {
+            background-color: rgba(247, 147, 76, 0.1);
+            color: var(--sunset-orange);
+        }
+        
+        .day-event.available {
+            background-color: rgba(125, 179, 125, 0.1);
+            color: var(--sage-green);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .calendar-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .header-actions {
+                width: 100%;
+            }
+            
+            .calendar-grid {
+                display: none;
+            }
+            
+            .responsive-calendar-list {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calendar Page -->
+    <section class="calendar-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>My Calendar</h1>
+                <div class="header-actions">
+                    <a href="availability-settings.html" class="btn btn-secondary">Manage Availability</a>
+                    <button class="btn">+ Add Event</button>
+                </div>
+            </div>
+            
+            <div class="calendar-container">
+                <div class="sidebar">
+                    <div class="calendar-types">
+                        <h3>Calendar Display</h3>
+                        <div class="calendar-type active">
+                            <div class="color-dot bookings-dot"></div>
+                            <span>My Bookings</span>
+                        </div>
+                        <div class="calendar-type">
+                            <div class="color-dot availability-dot"></div>
+                            <span>My Availability</span>
+                        </div>
+                        <div class="calendar-type">
+                            <div class="color-dot tours-dot"></div>
+                            <span>Scheduled Tours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="my-listings">
+                        <h3>My Listings</h3>
+                        <div class="listing-item active">
+                            <div class="listing-checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Cozy Private Room</span>
+                        </div>
+                        <div class="listing-item">
+                            <div class="listing-checkbox">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Shared Apartment Near Transit</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upcoming-events">
+                        <h3>Upcoming Events</h3>
+                        <div class="event-item">
+                            <div class="event-date">Today, 3:00 PM</div>
+                            <div class="event-title">Video Tour</div>
+                            <div class="event-with">with <span class="event-user">Emma Martinez</span></div>
+                        </div>
+                        <div class="event-item booking">
+                            <div class="event-date">Tomorrow, 12:00 PM</div>
+                            <div class="event-title">Move-in Appointment</div>
+                            <div class="event-with">with <span class="event-user">Michael Brown</span></div>
+                        </div>
+                        <div class="event-item tour">
+                            <div class="event-date">Sep 28, 4:30 PM</div>
+                            <div class="event-title">In-person Tour</div>
+                            <div class="event-with">with <span class="event-user">James Thomas</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="main-calendar">
+                    <div class="calendar-nav">
+                        <div class="calendar-period">September 2023</div>
+                        <div class="calendar-controls">
+                            <div class="calendar-view-options">
+                                <div class="calendar-view-option">Day</div>
+                                <div class="calendar-view-option">Week</div>
+                                <div class="calendar-view-option active">Month</div>
+                            </div>
+                            <div class="calendar-control">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="calendar-control">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <button class="btn btn-secondary">Today</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="calendar-header">Sun</div>
+                        <div class="calendar-header">Mon</div>
+                        <div class="calendar-header">Tue</div>
+                        <div class="calendar-header">Wed</div>
+                        <div class="calendar-header">Thu</div>
+                        <div class="calendar-header">Fri</div>
+                        <div class="calendar-header">Sat</div>
+                        
+                        <!-- First week -->
+                        <div class="calendar-day other-month">
+                            <div class="day-number">27</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">28</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">29</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">30</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">31</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">1</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">2</div>
+                        </div>
+                        
+                        <!-- Second week -->
+                        <div class="calendar-day">
+                            <div class="day-number">3</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">4</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">5</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">6</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">7</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">8</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">9</div>
+                        </div>
+                        
+                        <!-- Third week -->
+                        <div class="calendar-day">
+                            <div class="day-number">10</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">11</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">12</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">13</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">14</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">15</div>
+                            <div class="day-events">
+                                <div class="day-event booking">Check-out: Linda Wilson</div>
+                            </div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">16</div>
+                        </div>
+                        
+                        <!-- Fourth week -->
+                        <div class="calendar-day">
+                            <div class="day-number">17</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">18</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">19</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">20</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">21</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">22</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">23</div>
+                        </div>
+                        
+                        <!-- Fifth week -->
+                        <div class="calendar-day">
+                            <div class="day-number">24</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">25</div>
+                            <div class="day-events">
+                                <div class="day-event booking">Move-in: Michael Brown</div>
+                            </div>
+                        </div>
+                        <div class="calendar-day today">
+                            <div class="day-number">26</div>
+                            <div class="day-events">
+                                <div class="day-event tour">Video Tour (3:00 PM)</div>
+                            </div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">27</div>
+                            <div class="day-events">
+                                <div class="day-event booking">Move-in Appointment (12:00 PM)</div>
+                            </div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">28</div>
+                            <div class="day-events">
+                                <div class="day-event tour">In-person Tour (4:30 PM)</div>
+                            </div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">29</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Calendar display options
+        const calendarTypes = document.querySelectorAll('.calendar-type');
+        
+        calendarTypes.forEach(type => {
+            type.addEventListener('click', function() {
+                calendarTypes.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // In a real implementation, this would filter the calendar events
+            });
+        });
+        
+        // Listing selection
+        const listingItems = document.querySelectorAll('.listing-item');
+        
+        listingItems.forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('active');
+                // In a real implementation, this would show/hide events for this listing
+            });
+        });
+        
+        // Calendar view options
+        const viewOptions = document.querySelectorAll('.calendar-view-option');
+        
+        viewOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                viewOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                // In a real implementation, this would change the calendar view
+                alert('This would switch to ' + this.textContent + ' view in a real implementation.');
+            });
+        });
+        
+        // Calendar navigation
+        const prevMonth = document.querySelector('.calendar-control:first-of-type');
+        const nextMonth = document.querySelector('.calendar-control:last-of-type');
+        const todayBtn = document.querySelector('.btn.btn-secondary');
+        
+        if (prevMonth) {
+            prevMonth.addEventListener('click', function() {
+                alert('This would navigate to the previous month in a real implementation.');
+            });
+        }
+        
+        if (nextMonth) {
+            nextMonth.addEventListener('click', function() {
+                alert('This would navigate to the next month in a real implementation.');
+            });
+        }
+        
+        if (todayBtn) {
+            todayBtn.addEventListener('click', function() {
+                alert('This would navigate to today in a real implementation.');
+            });
+        }
+        
+        // Add event button
+        const addEventBtn = document.querySelector('.header-actions .btn');
+        
+        if (addEventBtn) {
+            addEventBtn.addEventListener('click', function() {
+                alert('This would open an event creation form in a real implementation.');
+            });
+        }
+        
+        // Day events
+        const dayEvents = document.querySelectorAll('.day-event');
+        
+        dayEvents.forEach(event => {
+            event.addEventListener('click', function() {
+                alert('This would open details for the event: ' + this.textContent + ' in a real implementation.');
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works For Homeowners - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(245, 239, 230, 0.85), rgba(245, 239, 230, 0.85)), url('https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        /* Process Section */
+        .process-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .process-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-number {
+            color: var(--paira-teal);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-image {
+            flex: 1;
+            max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--warm-beige);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--paira-blue);
+            font-size: 1.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .testimonial-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .testimonial-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .testimonial {
+            background-color: var(--off-white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .testimonial-role {
+            color: var(--paira-teal);
+            font-size: 0.875rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--paira-blue);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(30, 107, 140, 0.9), rgba(30, 107, 140, 0.9)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .cta-section h2 {
+            color: white;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            margin-top: 2rem;
+            background-color: white;
+            color: var(--paira-blue);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .process-step, 
+            .process-step:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-image {
+                max-width: 100%;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">How It Works</a></li>
+                <li class="nav-item"><a href="../index.html#benefits" class="nav-link">Benefits</a></li>
+                <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="../about/about-us.html" class="nav-link">About</a></li>
+            </ul>
+            
+            <div class="header-buttons">
+                <a href="./login.html" class="btn btn-secondary">Log In</a>
+                <a href="./signup.html" class="btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>How PairaLife Works for Homeowners</h1>
+            <p class="sub-headline">Earn income from your extra space and enjoy companionship with carefully matched housemates</p>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="process-header">
+                <h2>How PairaLife Helps Homeowners</h2>
+                <p>Our platform simplifies finding compatible housemates for your extra space</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-content">
+                        <div class="step-number">Step 1</div>
+                        <h3>List Your Home</h3>
+                        <p>Create a detailed profile of your home, the space available, and what you're looking for in an ideal housemate.</p>
+                        <p>Our guided listing process helps you showcase your home's best features and communicate your preferences to find the right match.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1558429498-11a1644ce9e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="List Your Home">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-content">
+                        <div class="step-number">Step 2</div>
+                        <h3>Connect with Potential Housemates</h3>
+                        <p>We'll match you with potential housemates who align with your lifestyle, preferences, and house rules.</p>
+                        <p>Our compatibility algorithm considers factors like daily routines, interests, and values to ensure harmonious living arrangements.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Connect with Housemates">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-content">
+                        <div class="step-number">Step 3</div>
+                        <h3>Interview Safely</h3>
+                        <p>Use our secure messaging platform to get to know potential housemates before meeting in person. All users are verified through our multi-step verification process.</p>
+                        <p>We provide guidelines for hosting home visits and questions to ask to ensure you find the right match for your home.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Interview Safely">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-content">
+                        <div class="step-number">Step 4</div>
+                        <h3>Finalize Your Arrangement</h3>
+                        <p>Once you've found your match, use our co-living agreement templates to create clear expectations around rent, utilities, common spaces, and house rules.</p>
+                        <p>We provide guidance on fair pricing, security deposits, and how to structure agreements that protect both parties.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1628102491629-778571d893a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Finalize Arrangement">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="benefits-header">
+                <h2>Benefits for Homeowners</h2>
+                <p>Sharing your home through PairaLife offers unique advantages</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Supplemental Income</h3>
+                    <p>Earn steady income from your extra space to help with mortgage payments, property taxes, or living expenses.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Companionship</h3>
+                    <p>Enjoy social connection and reduce isolation without compromising your independence and privacy.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Practical Support</h3>
+                    <p>Depending on your arrangement, housemates can help with household tasks, technology assistance, or transportation.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Enhanced Safety</h3>
+                    <p>Having someone else in the home can provide peace of mind and increased security, especially for those living alone.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <h3>Age in Place</h3>
+                    <p>Generate income and support that makes it possible to stay in your home longer as you age.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-laugh-beam"></i>
+                    </div>
+                    <h3>Intergenerational Connection</h3>
+                    <p>Build meaningful relationships with younger generations, exchanging knowledge, skills, and perspectives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonial-header">
+                <h2>Success Stories from Homeowners</h2>
+                <p>Real experiences from homeowners in our community</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1581579438747-104cd65e3cc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="Robert" class="testimonial-img">
+                        <div>
+                            <div class="testimonial-name">Robert, 68</div>
+                            <div class="testimonial-role">Retired Teacher</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"After my wife passed, my four-bedroom house felt too empty. Through PairaLife, I found two wonderful graduate students who rent rooms from me. The extra income helps with maintenance costs, and having their energy in the house has been a blessing. They help with yard work and tech problems, and I provide a quiet place to study. It's the perfect arrangement."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Margaret" class="testimonial-img">
+                        <div>
+                            <div class="testimonial-name">Margaret, 72</div>
+                            <div class="testimonial-role">Retired Nurse</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"I was considering moving to assisted living because of the maintenance costs of my home, but PairaLife offered another option. I now share my home with Emma, a young nurse who helps with groceries and heavy lifting in exchange for reduced rent. The arrangement allows me to stay in my beloved home while having company and security."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="James and Linda" class="testimonial-img">
+                        <div>
+                            <div class="testimonial-name">James & Linda, 65 & 63</div>
+                            <div class="testimonial-role">Semi-Retired Couple</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"We have a finished basement with its own entrance that sat unused. Now we rent it to Carlos, a young professional who travels frequently for work. It's perfect—we have company when he's around but plenty of privacy too. The rental income supplements our retirement and helps us maintain our garden home. PairaLife's verification system gave us confidence in finding the right person."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions from homeowners about sharing their space</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to modify my home before listing it?</div>
+                    <p>While modifications aren't required, we recommend ensuring the living space offers adequate privacy and safety. Simple changes like adding a lock to the bedroom door or creating a small kitchenette can make your space more appealing to potential housemates.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How does PairaLife ensure my safety?</div>
+                    <p>Safety is our top priority. All users undergo verification checks including identity verification, background checks, and reference reviews. Our messaging system lets you get to know potential matches before meeting. We provide guidance on how to interview housemates and establish clear boundaries.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Will this affect my home insurance or taxes?</div>
+                    <p>We recommend contacting your insurance provider to discuss how home sharing might affect your policy. Some homeowners may need to adjust their coverage. Regarding taxes, rental income is generally taxable, but you may also qualify for certain deductions. We provide resources to help you understand these considerations.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What if the arrangement doesn't work out?</div>
+                    <p>Our co-living agreement templates include clear terms for ending the arrangement, including notice periods and conditions. We also offer mediation services if issues arise. Most arrangements can be adjusted with open communication, which we facilitate through our platform.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How much should I charge for rent?</div>
+                    <p>We provide guidance on setting fair rates based on your location, the space offered, included amenities, and any additional benefits (like meals or transportation). You can also adjust pricing based on any help or assistance the housemate provides as part of the arrangement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Share Your Home with the Right Match?</h2>
+                <p>Join thousands of homeowners who've found compatible housemates through PairaLife.</p>
+                <a href="#" class="btn btn-large cta-button">List Your Home Today</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="../about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="../about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="../about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="../about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

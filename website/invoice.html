@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Invoice Page Specific Styles */
+        .invoice-page {
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .invoice-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .invoice-header {
+            background-color: var(--paira-blue);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .invoice-brand h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invoice-brand p {
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+        
+        .invoice-details {
+            text-align: right;
+        }
+        
+        .invoice-id {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invoice-date {
+            opacity: 0.8;
+        }
+        
+        .invoice-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        .status-paid {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-green);
+        }
+        
+        .invoice-body {
+            padding: 2rem;
+        }
+        
+        .invoice-addresses {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .address-block h4 {
+            margin-bottom: 0.5rem;
+            color: var(--warm-gray);
+            font-size: 1rem;
+        }
+        
+        .address-block p {
+            margin-bottom: 0.25rem;
+        }
+        
+        .address-block strong {
+            color: var(--paira-blue);
+        }
+        
+        .invoice-description {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .description-title {
+            margin-bottom: 1rem;
+        }
+        
+        .invoice-items {
+            margin-bottom: 2rem;
+        }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .invoice-table th {
+            background-color: var(--light-gray);
+            padding: 0.75rem;
+            text-align: left;
+            color: var(--paira-blue);
+            font-weight: 600;
+        }
+        
+        .invoice-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .item-name {
+            width: 40%;
+        }
+        
+        .item-qty {
+            width: 15%;
+            text-align: center;
+        }
+        
+        .item-price {
+            width: 20%;
+            text-align: right;
+        }
+        
+        .item-total {
+            width: 25%;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .invoice-summary {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .summary-table {
+            width: 60%;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        
+        .summary-row.total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--paira-blue);
+            border-top: 2px solid var(--light-gray);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .invoice-footer {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+        
+        .invoice-footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .footer-note {
+            font-style: italic;
+            color: var(--warm-gray);
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 25px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .invoice-header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .invoice-details {
+                text-align: left;
+            }
+            
+            .invoice-addresses {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .summary-table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="messages.html" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Invoice Page -->
+    <section class="invoice-page">
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h1>Invoice</h1>
+                    <p>Invoice details for your recent transaction.</p>
+                </div>
+                
+                <div class="invoice-actions">
+                    <a href="#" class="btn btn-secondary" id="printInvoice">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </a>
+                    <a href="#" class="btn" id="downloadInvoice">
+                        <i class="fas fa-download"></i>
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+            
+            <div class="invoice-container">
+                <!-- Invoice Header -->
+                <div class="invoice-header">
+                    <div class="invoice-brand">
+                        <h2>PairaLife, Inc.</h2>
+                        <p>Connecting lives, sharing spaces</p>
+                    </div>
+                    
+                    <div class="invoice-details">
+                        <div class="invoice-id">Invoice #INV-7895</div>
+                        <div class="invoice-date">July 25, 2023</div>
+                        <div class="invoice-status status-paid">Paid</div>
+                    </div>
+                </div>
+                
+                <!-- Invoice Body -->
+                <div class="invoice-body">
+                    <!-- Addresses -->
+                    <div class="invoice-addresses">
+                        <div class="address-block">
+                            <h4>Billed To:</h4>
+                            <p><strong>John Doe</strong></p>
+                            <p>123 Main Street</p>
+                            <p>Apt 4B</p>
+                            <p>New York, NY 10001</p>
+                            <p>United States</p>
+                            <p>john.doe@example.com</p>
+                        </div>
+                        
+                        <div class="address-block">
+                            <h4>From:</h4>
+                            <p><strong>PairaLife, Inc.</strong></p>
+                            <p>456 Market Street</p>
+                            <p>Suite 200</p>
+                            <p>San Francisco, CA 94105</p>
+                            <p>United States</p>
+                            <p>billing@pairalife.com</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="invoice-description">
+                        <h3 class="description-title">Booking Details</h3>
+                        <p><strong>Property:</strong> Lakeside Cottage</p>
+                        <p><strong>Reservation Number:</strong> BK78952</p>
+                        <p><strong>Check-in Date:</strong> August 10, 2023</p>
+                        <p><strong>Check-out Date:</strong> August 14, 2023</p>
+                        <p><strong>Number of Nights:</strong> 4</p>
+                    </div>
+                    
+                    <!-- Items Table -->
+                    <div class="invoice-items">
+                        <table class="invoice-table">
+                            <thead>
+                                <tr>
+                                    <th class="item-name">Description</th>
+                                    <th class="item-qty">Qty</th>
+                                    <th class="item-price">Unit Price</th>
+                                    <th class="item-total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="item-name">Lakeside Cottage Accommodation</td>
+                                    <td class="item-qty">4</td>
+                                    <td class="item-price">$75.00</td>
+                                    <td class="item-total">$300.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="item-name">Cleaning Fee</td>
+                                    <td class="item-qty">1</td>
+                                    <td class="item-price">$35.00</td>
+                                    <td class="item-total">$35.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="item-name">Security Deposit (Refundable)</td>
+                                    <td class="item-qty">1</td>
+                                    <td class="item-price">$150.00</td>
+                                    <td class="item-total">$150.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Summary -->
+                    <div class="invoice-summary">
+                        <div class="summary-table">
+                            <div class="summary-row">
+                                <div>Subtotal</div>
+                                <div>$335.00</div>
+                            </div>
+                            <div class="summary-row">
+                                <div>Service Fee</div>
+                                <div>$15.00</div>
+                            </div>
+                            <div class="summary-row">
+                                <div>Security Deposit</div>
+                                <div>$150.00</div>
+                            </div>
+                            <div class="summary-row total">
+                                <div>Total</div>
+                                <div>$500.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Invoice Footer -->
+                <div class="invoice-footer">
+                    <p>Payment was processed on July 25, 2023 with Visa ending in 4242.</p>
+                    <p class="footer-note">Security deposit is fully refundable within 7 days after checkout if no damage is reported.</p>
+                    <div class="payment-methods">
+                        <div class="payment-icon"><i class="fab fa-cc-visa"></i></div>
+                        <div class="payment-icon"><i class="fab fa-cc-mastercard"></i></div>
+                        <div class="payment-icon"><i class="fab fa-cc-amex"></i></div>
+                        <div class="payment-icon"><i class="fab fa-cc-paypal"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Print invoice
+        const printInvoice = document.getElementById('printInvoice');
+        
+        printInvoice.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.print();
+        });
+        
+        // Download invoice as PDF
+        const downloadInvoice = document.getElementById('downloadInvoice');
+        
+        downloadInvoice.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('PDF download functionality would be implemented here.');
+        });
+    </script>
+</body>
+</html> 

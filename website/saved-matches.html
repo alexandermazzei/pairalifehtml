@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Matches - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+
+        /* Saved Matches Page Styles */
+        .saved-matches-section {
+            padding: 2rem 0;
+        }
+        
+        .saved-matches-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .section-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: var(--paira-blue);
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .control-btn:hover {
+            color: var(--paira-teal);
+        }
+        
+        .matches-tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .matches-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--warm-gray);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .matches-tab.active {
+            color: var(--paira-blue);
+            border-bottom: 3px solid var(--paira-blue);
+        }
+        
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .match-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-type {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 5;
+        }
+        
+        .card-type.person {
+            color: var(--sage-green);
+        }
+        
+        .card-type.property {
+            color: var(--paira-blue);
+        }
+        
+        .card-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 5;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .card-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-gray);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .card-action-btn:hover {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .card-content {
+            padding: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            margin-bottom: 0.75rem;
+        }
+        
+        .card-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-detail {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-tag {
+            background-color: rgba(43, 181, 176, 0.1);
+            color: var(--paira-teal);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .card-date {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+        }
+        
+        .card-match {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--sage-green);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-menu {
+                margin-top: 1rem;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .section-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .matches-tabs {
+                overflow-x: auto;
+                width: 100%;
+                padding-bottom: 0.5rem;
+            }
+            
+            .matches-tab {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Listing</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Saved Matches Section -->
+    <section class="saved-matches-section">
+        <div class="container saved-matches-container">
+            <div class="section-title">
+                <h1>Your Saved Matches</h1>
+                <div class="section-controls">
+                    <div class="control-btn">
+                        <i class="fas fa-sort"></i> Sort by: <strong>Date Saved</strong>
+                    </div>
+                    <div class="control-btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </div>
+                </div>
+            </div>
+            
+            <div class="matches-tabs">
+                <div class="matches-tab active">All (12)</div>
+                <div class="matches-tab">People (8)</div>
+                <div class="matches-tab">Properties (4)</div>
+                <div class="matches-tab">Recently Viewed</div>
+            </div>
+            
+            <div class="matches-grid">
+                <!-- People Match Card 1 -->
+                <div class="match-card">
+                    <div class="card-type person">
+                        <i class="fas fa-user"></i> Person
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="Sarah Parker" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Sarah Parker, 28</h3>
+                        <div class="card-subtitle">Software Engineer • San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-users"></i> Looking for 1-2 roommates
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available from Oct 1
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Non-smoker</span>
+                            <span class="card-tag">Early riser</span>
+                            <span class="card-tag">Professional</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 15, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 92% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Match Card 1 -->
+                <div class="match-card">
+                    <div class="card-type property">
+                        <i class="fas fa-home"></i> Property
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="SOMA Apartment" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">$1,200/month • Private Room</h3>
+                        <div class="card-subtitle">SOMA, San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-bed"></i> Private Room
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-bath"></i> Shared Bath
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available Now
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Wifi</span>
+                            <span class="card-tag">Kitchen</span>
+                            <span class="card-tag">Washer/Dryer</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 18, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 88% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- People Match Card 2 -->
+                <div class="match-card">
+                    <div class="card-type person">
+                        <i class="fas fa-user"></i> Person
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="Michael Chen" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Michael Chen, 32</h3>
+                        <div class="card-subtitle">Product Manager • San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-users"></i> Looking for 1 roommate
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available from Nov 1
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Non-smoker</span>
+                            <span class="card-tag">Pet-friendly</span>
+                            <span class="card-tag">Professional</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 20, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 85% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Match Card 2 -->
+                <div class="match-card">
+                    <div class="card-type property">
+                        <i class="fas fa-home"></i> Property
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="Marina District Apartment" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">$1,500/month • Private Room</h3>
+                        <div class="card-subtitle">Marina District, San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-bed"></i> Private Room
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-bath"></i> Private Bath
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available Oct 15
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Parking</span>
+                            <span class="card-tag">Gym</span>
+                            <span class="card-tag">Furnished</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 21, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 90% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- People Match Card 3 -->
+                <div class="match-card">
+                    <div class="card-type person">
+                        <i class="fas fa-user"></i> Person
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="Emily Johnson" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Emily Johnson, 26</h3>
+                        <div class="card-subtitle">Graphic Designer • San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-users"></i> Looking for 2 roommates
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available Now
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Creative</span>
+                            <span class="card-tag">Night owl</span>
+                            <span class="card-tag">Remote worker</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 22, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 82% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Match Card 3 -->
+                <div class="match-card">
+                    <div class="card-type property">
+                        <i class="fas fa-home"></i> Property
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="card-action-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <img src="https://via.placeholder.com/300x180" alt="Mission District House" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">$1,350/month • Private Room</h3>
+                        <div class="card-subtitle">Mission District, San Francisco</div>
+                        <div class="card-details">
+                            <div class="card-detail">
+                                <i class="fas fa-bed"></i> Private Room
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-bath"></i> Shared Bath
+                            </div>
+                            <div class="card-detail">
+                                <i class="fas fa-calendar-alt"></i> Available Nov 1
+                            </div>
+                        </div>
+                        <div class="card-tags">
+                            <span class="card-tag">Pet-friendly</span>
+                            <span class="card-tag">Backyard</span>
+                            <span class="card-tag">Wifi</span>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="card-date">Saved on Sep 23, 2023</div>
+                            <div class="card-match">
+                                <i class="fas fa-check-circle"></i> 78% Match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+                <div class="page-item" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--light-gray); cursor: pointer;">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="page-item active" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--paira-blue); background-color: var(--paira-blue); color: white; cursor: pointer;">1</div>
+                <div class="page-item" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--light-gray); cursor: pointer;">2</div>
+                <div class="page-item" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--light-gray); cursor: pointer;">3</div>
+                <div class="page-item" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; border: 1px solid var(--light-gray); cursor: pointer;">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.matches-tab');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you would normally fetch and display different content
+                // based on the selected tab
+            });
+        });
+        
+        // Card action buttons functionality
+        const deleteButtons = document.querySelectorAll('.card-action-btn:first-child');
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.match-card');
+                
+                // Add a visual effect before removing
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.9)';
+                card.style.transition = 'all 0.3s ease';
+                
+                // Remove the card after animation
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            });
+        });
+        
+        // Share buttons functionality
+        const shareButtons = document.querySelectorAll('.card-action-btn:nth-child(2)');
+        
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Share functionality would be implemented here!');
+            });
+        });
+    </script>
+</body>
+</html> 

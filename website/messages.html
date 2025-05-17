@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Messages Page Specific Styles */
+        .messages-page {
+            padding: 2rem 0;
+        }
+        
+        .messages-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            height: calc(100vh - 200px);
+            min-height: 600px;
+        }
+        
+        .conversation-list {
+            border-right: 1px solid var(--light-gray);
+            overflow-y: auto;
+        }
+        
+        .conversation-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .conversation-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+        
+        .search-box {
+            position: relative;
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--light-gray);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.875rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--warm-gray);
+        }
+        
+        .conversation-item {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .conversation-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .conversation-item.active {
+            background-color: #E6F0F5;
+            border-left: 3px solid var(--paira-blue);
+        }
+        
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .conversation-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .conversation-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .conversation-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--paira-blue);
+        }
+        
+        .conversation-preview {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .conversation-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+        
+        .conversation-time {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+        }
+        
+        .conversation-badge {
+            background-color: var(--paira-teal);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chat-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .chat-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .chat-user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .chat-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-user-name {
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .chat-user-status {
+            font-size: 0.75rem;
+            color: var(--sage-green);
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .chat-action-btn {
+            background: none;
+            border: none;
+            color: var(--warm-gray);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        
+        .chat-action-btn:hover {
+            color: var(--paira-blue);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+            background-color: var(--light-gray);
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            text-align: right;
+            opacity: 0.8;
+        }
+        
+        .date-divider {
+            text-align: center;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .date-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background-color: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .date-divider span {
+            background-color: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+        }
+        
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .chat-input-container {
+            position: relative;
+            flex: 1;
+        }
+        
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--light-gray);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1rem;
+            resize: none;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--paira-teal);
+        }
+        
+        .chat-input-actions {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input-action {
+            background: none;
+            border: none;
+            color: var(--warm-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .chat-input-action:hover {
+            color: var(--paira-blue);
+        }
+        
+        .send-button {
+            background-color: var(--paira-teal);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .send-button:hover {
+            background-color: #249e9a;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 991px) {
+            .messages-container {
+                grid-template-columns: 1fr;
+                position: relative;
+            }
+            
+            .conversation-list {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                background-color: white;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .conversation-list.active {
+                transform: translateX(0);
+            }
+            
+            .back-to-chats {
+                display: block;
+                margin-right: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .message {
+                max-width: 80%;
+            }
+        }
+        
+        /* Mobile specific toggle button */
+        .toggle-conversations {
+            display: none;
+            background: var(--paira-blue);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 991px) {
+            .toggle-conversations {
+                display: flex;
+            }
+        }
+        
+        .back-to-chats {
+            background: none;
+            border: none;
+            color: var(--paira-blue);
+            cursor: pointer;
+            display: none;
+        }
+        
+        @media (max-width: 991px) {
+            .back-to-chats {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="browse-listings.html" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">My Listings</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile-edit.html" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Messages Page -->
+    <section class="messages-page">
+        <div class="container">
+            <div class="messages-container">
+                <div class="conversation-list" id="conversationList">
+                    <div class="conversation-header">
+                        <h2 class="conversation-title">Messages</h2>
+                        <button class="chat-action-btn">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search conversations...">
+                    </div>
+                    
+                    <div class="conversation-item active">
+                        <div class="conversation-avatar">
+                            <img src="https://via.placeholder.com/100x100/1E6B8C/FFFFFF?text=SJ" alt="Sarah Johnson">
+                        </div>
+                        <div class="conversation-info">
+                            <div class="conversation-name">Sarah Johnson</div>
+                            <div class="conversation-preview">Yes, the room is still available for November 1st</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">10:45 AM</div>
+                            <div class="conversation-badge">2</div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">
+                            <img src="https://via.placeholder.com/100x100/F7934C/FFFFFF?text=MB" alt="Michael Brown">
+                        </div>
+                        <div class="conversation-info">
+                            <div class="conversation-name">Michael Brown</div>
+                            <div class="conversation-preview">Can we schedule a video tour for tomorrow?</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">Yesterday</div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">
+                            <img src="https://via.placeholder.com/100x100/2BB5B0/FFFFFF?text=EM" alt="Emma Martinez">
+                        </div>
+                        <div class="conversation-info">
+                            <div class="conversation-name">Emma Martinez</div>
+                            <div class="conversation-preview">Thanks for the tour! I'm very interested in the space</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">Wed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">
+                            <img src="https://via.placeholder.com/100x100/7DB37D/FFFFFF?text=JT" alt="James Thomas">
+                        </div>
+                        <div class="conversation-info">
+                            <div class="conversation-name">James Thomas</div>
+                            <div class="conversation-preview">I'm looking for a 6-month lease, is that possible?</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">Oct 20</div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">
+                            <img src="https://via.placeholder.com/100x100/625D5D/FFFFFF?text=LW" alt="Linda Wilson">
+                        </div>
+                        <div class="conversation-info">
+                            <div class="conversation-name">Linda Wilson</div>
+                            <div class="conversation-preview">Is the parking situation still the same?</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">Oct 18</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-area">
+                    <div class="chat-header">
+                        <div class="chat-user">
+                            <button class="back-to-chats" id="backToChats">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div class="chat-user-avatar">
+                                <img src="https://via.placeholder.com/100x100/1E6B8C/FFFFFF?text=SJ" alt="Sarah Johnson">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-name">Sarah Johnson</div>
+                                <div class="chat-user-status">Online</div>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="chat-action-btn">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button class="chat-action-btn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                            <button class="chat-action-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages">
+                        <div class="date-divider">
+                            <span>Today</span>
+                        </div>
+                        
+                        <div class="message received">
+                            <div class="message-content">
+                                Hello! I saw your listing for the private room in San Francisco. Is it still available for November 1st?
+                            </div>
+                            <div class="message-time">10:30 AM</div>
+                        </div>
+                        
+                        <div class="message sent">
+                            <div class="message-content">
+                                Hi Sarah! Yes, the room is still available for November 1st. Are you interested in seeing more details?
+                            </div>
+                            <div class="message-time">10:32 AM</div>
+                        </div>
+                        
+                        <div class="message received">
+                            <div class="message-content">
+                                Definitely! I'd love to know more about the amenities and if utilities are included in the rent.
+                            </div>
+                            <div class="message-time">10:35 AM</div>
+                        </div>
+                        
+                        <div class="message sent">
+                            <div class="message-content">
+                                Great! The room comes fully furnished with a queen bed, desk, and closet. Utilities included are electricity, water, and high-speed internet. The apartment has a shared bathroom and fully equipped kitchen. Would you be interested in a virtual tour?
+                            </div>
+                            <div class="message-time">10:40 AM</div>
+                        </div>
+                        
+                        <div class="message received">
+                            <div class="message-content">
+                                That sounds perfect! Yes, the room is still available for November 1st. I'd be happy to schedule a virtual tour if that works for you.
+                            </div>
+                            <div class="message-time">10:45 AM</div>
+                        </div>
+                        
+                        <div class="message received">
+                            <div class="message-content">
+                                When would be a good time for you?
+                            </div>
+                            <div class="message-time">10:45 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <div class="chat-input-container">
+                            <textarea class="chat-input" placeholder="Type a message..."></textarea>
+                            <div class="chat-input-actions">
+                                <button class="chat-input-action">
+                                    <i class="far fa-smile"></i>
+                                </button>
+                                <button class="chat-input-action">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="toggle-conversations" id="toggleConversations">
+                <i class="fas fa-comments"></i>
+            </button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Mobile conversation toggle
+        const toggleConversationsBtn = document.getElementById('toggleConversations');
+        const conversationList = document.getElementById('conversationList');
+        const backToChatsBtn = document.getElementById('backToChats');
+        
+        if (toggleConversationsBtn && conversationList) {
+            toggleConversationsBtn.addEventListener('click', function() {
+                conversationList.classList.add('active');
+            });
+        }
+        
+        if (backToChatsBtn && conversationList) {
+            backToChatsBtn.addEventListener('click', function() {
+                conversationList.classList.remove('active');
+            });
+        }
+        
+        // Conversation selection
+        const conversationItems = document.querySelectorAll('.conversation-item');
+        
+        conversationItems.forEach(item => {
+            item.addEventListener('click', function() {
+                conversationItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // On mobile, hide conversation list after selection
+                if (window.innerWidth <= 991) {
+                    conversationList.classList.remove('active');
+                }
+                
+                // In a real app, this would load the selected conversation
+            });
+        });
+        
+        // Send message functionality (simple demo)
+        const chatInput = document.querySelector('.chat-input');
+        const sendButton = document.querySelector('.send-button');
+        const chatMessages = document.querySelector('.chat-messages');
+        
+        if (sendButton && chatInput && chatMessages) {
+            sendButton.addEventListener('click', function() {
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                    // Create a new message element
+                    const messageTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    const newMessage = document.createElement('div');
+                    newMessage.className = 'message sent';
+                    newMessage.innerHTML = `
+                        <div class="message-content">${messageText}</div>
+                        <div class="message-time">${messageTime}</div>
+                    `;
+                    
+                    // Add to chat
+                    chatMessages.appendChild(newMessage);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+            
+            // Send on Enter (but allow Shift+Enter for new line)
+            chatInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendButton.click();
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

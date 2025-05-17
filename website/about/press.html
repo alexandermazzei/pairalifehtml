@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .quote {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            border-left: 4px solid var(--paira-teal);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(245, 239, 230, 0.85), rgba(245, 239, 230, 0.85)), url('https://images.unsplash.com/photo-1551636898-47668aa61de2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        /* Press Kit Section */
+        .press-kit {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .press-kit-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .press-kit-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .press-kit-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .kit-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Press Releases */
+        .press-releases {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .releases-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .releases-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .release-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .release-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .release-date {
+            font-size: 0.875rem;
+            color: var(--paira-teal);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .release-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .release-excerpt {
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--paira-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .read-more i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--paira-teal);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Media Coverage */
+        .media-coverage {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .coverage-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .coverage-item {
+            background-color: var(--off-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .coverage-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .coverage-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .coverage-source {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--paira-teal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .coverage-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .coverage-excerpt {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        /* Press Contact */
+        .press-contact {
+            padding: 5rem 0;
+            background-color: var(--warm-beige);
+            text-align: center;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-person {
+            font-size: 1.25rem;
+            color: var(--paira-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .contact-role {
+            color: var(--paira-teal);
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .contact-method {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: var(--warm-gray);
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: var(--paira-blue);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background-color: var(--paira-blue);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(30, 107, 140, 0.9), rgba(30, 107, 140, 0.9)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            margin-top: 2rem;
+            background-color: white;
+            color: var(--paira-blue);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .press-kit-content {
+                flex-direction: column-reverse;
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .kit-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .kit-buttons .btn {
+                width: 100%;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html#how-it-works" class="nav-link">How It Works</a></li>
+                <li class="nav-item"><a href="../index.html#benefits" class="nav-link">Benefits</a></li>
+                <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="about-us.html" class="nav-link active">About</a></li>
+            </ul>
+            
+            <div class="header-buttons">
+                <a href="./login.html" class="btn btn-secondary">Log In</a>
+                <a href="./signup.html" class="btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Press & Media</h1>
+            <p class="sub-headline">Latest news, media resources, and contact information for PairaLife</p>
+        </div>
+    </section>
+    
+    <!-- Press Kit -->
+    <section class="press-kit">
+        <div class="container">
+            <div class="press-kit-content">
+                <div class="press-kit-text">
+                    <h2>PairaLife Press Kit</h2>
+                    <p>Our press kit contains everything you need to accurately represent PairaLife in your coverage, including our company background, founder information, high-resolution logos, images, and brand guidelines.</p>
+                    <p>If you need additional materials or have specific requests, please don't hesitate to contact our press team.</p>
+                    
+                    <div class="kit-buttons">
+                        <a href="#" class="btn">Download Press Kit</a>
+                        <a href="#" class="btn btn-secondary">Brand Guidelines</a>
+                        <a href="#" class="btn btn-secondary">View Media Assets</a>
+                    </div>
+                </div>
+                
+                <div class="press-kit-image">
+                    <img src="https://images.unsplash.com/photo-1586892477838-2b96e85e0f96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="PairaLife branding materials">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Press Releases -->
+    <section class="press-releases">
+        <div class="container">
+            <div class="releases-header">
+                <h2>Recent Press Releases</h2>
+                <p>The latest announcements from PairaLife</p>
+            </div>
+            
+            <div class="releases-list">
+                <div class="release-item">
+                    <div class="release-date">October 12, 2023</div>
+                    <h3 class="release-title">PairaLife Expands to Five New Metropolitan Areas</h3>
+                    <p class="release-excerpt">PairaLife announced today the expansion of its platform to five additional metropolitan areas, bringing its innovative co-living solutions to more communities across the country. This expansion follows a successful funding round and growing demand for intergenerational living arrangements.</p>
+                    <a href="#" class="read-more">Read Full Release <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="release-item">
+                    <div class="release-date">August 25, 2023</div>
+                    <h3 class="release-title">PairaLife Releases Study on Housing Affordability and Co-Living Benefits</h3>
+                    <p class="release-excerpt">A new study commissioned by PairaLife reveals significant financial and social benefits of intergenerational co-living arrangements. The research highlights how shared living can reduce housing costs by up to 40% while providing meaningful social connections for participants.</p>
+                    <a href="#" class="read-more">Read Full Release <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="release-item">
+                    <div class="release-date">June 5, 2023</div>
+                    <h3 class="release-title">PairaLife Secures $12M in Series A Funding</h3>
+                    <p class="release-excerpt">PairaLife announced today that it has secured $12 million in Series A funding led by Urban Innovation Fund with participation from aging-focused venture firm Primetime Partners and several angel investors. The funding will support platform enhancements and market expansion.</p>
+                    <a href="#" class="read-more">Read Full Release <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="release-item">
+                    <div class="release-date">March 18, 2023</div>
+                    <h3 class="release-title">PairaLife Launches Enhanced Safety Verification System</h3>
+                    <p class="release-excerpt">PairaLife has implemented a new multi-layered verification system designed to enhance safety and build trust among platform users. The system includes advanced identity verification, enhanced background checks, and secure communication tools.</p>
+                    <a href="#" class="read-more">Read Full Release <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Media Coverage -->
+    <section class="media-coverage">
+        <div class="container">
+            <div class="coverage-header">
+                <h2>Media Coverage</h2>
+                <p>PairaLife in the news</p>
+            </div>
+            
+            <div class="coverage-grid">
+                <div class="coverage-item">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tech Chronicle coverage" class="coverage-image">
+                    <div class="coverage-content">
+                        <div class="coverage-source">Tech Chronicle</div>
+                        <h3 class="coverage-title">How PairaLife is Disrupting Traditional Housing Models</h3>
+                        <p class="coverage-excerpt">This in-depth feature explores how PairaLife's platform is creating new housing possibilities by connecting homeowners with compatible housemates across generations.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="coverage-item">
+                    <img src="https://images.unsplash.com/photo-1589262804704-c5aa9e6def89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Urban Living Today coverage" class="coverage-image">
+                    <div class="coverage-content">
+                        <div class="coverage-source">Urban Living Today</div>
+                        <h3 class="coverage-title">Seniors and Millennials: Unlikely Roommates Finding Common Ground</h3>
+                        <p class="coverage-excerpt">Urban Living Today profiles several successful co-living arrangements facilitated by PairaLife, highlighting the mutual benefits for both older homeowners and younger renters.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="coverage-item">
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Housing Insider coverage" class="coverage-image">
+                    <div class="coverage-content">
+                        <div class="coverage-source">Housing Insider</div>
+                        <h3 class="coverage-title">PairaLife CEO on the Future of Co-Living Arrangements</h3>
+                        <p class="coverage-excerpt">An exclusive interview with PairaLife's CEO discussing the vision behind the platform and how co-living can help address both housing affordability and social isolation.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Press Contact -->
+    <section class="press-contact">
+        <div class="container">
+            <div class="contact-container">
+                <h2>Press Contact</h2>
+                <p>For media inquiries, interview requests, and other press-related questions, please contact our press team.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-person">Sophia Lee</div>
+                    <div class="contact-role">Director of Communications</div>
+                    <p>Sophia and her team are available to assist with media inquiries, provide additional information about PairaLife, and arrange interviews with our executive team.</p>
+                    
+                    <div class="contact-method">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span>press@pairalife.com</span>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span>(555) 123-4567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Find Your Co-Living Match?</h2>
+                <p>Join the PairaLife community today and discover how shared living can offer companionship, affordability, and a richer life experience.</p>
+                <a href="./signup.html" class="btn btn-large cta-button">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="team.html">Team</a></li>
+                        <li class="footer-link"><a href="press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

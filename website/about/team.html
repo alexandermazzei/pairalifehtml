@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .quote {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            border-left: 4px solid var(--paira-teal);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: var(--warm-beige);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(245, 239, 230, 0.85), rgba(245, 239, 230, 0.85)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        /* Team Section */
+        .team-intro {
+            padding: 5rem 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .team-intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Leadership Section */
+        .leadership {
+            padding: 5rem 0;
+            background-color: var(--off-white);
+        }
+        
+        .leadership-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-photo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+        }
+        
+        .team-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--paira-blue);
+        }
+        
+        .team-role {
+            color: var(--paira-teal);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .team-bio {
+            margin-bottom: 1.5rem;
+        }
+        
+        .team-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .team-social-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-gray);
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .team-social-link:hover {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        /* Team Members Section */
+        .team-members {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        /* Join Team Section */
+        .join-team {
+            padding: 5rem 0;
+            background-color: var(--paira-teal);
+            color: white;
+            text-align: center;
+        }
+        
+        .join-team h2 {
+            color: white;
+        }
+        
+        .jobs-btn {
+            margin-top: 2rem;
+            background-color: white;
+            color: var(--paira-teal);
+            border: none;
+        }
+        
+        .jobs-btn:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background-color: var(--paira-blue);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(30, 107, 140, 0.9), rgba(30, 107, 140, 0.9)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            margin-top: 2rem;
+            background-color: white;
+            color: var(--paira-blue);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html#how-it-works" class="nav-link">How It Works</a></li>
+                <li class="nav-item"><a href="../index.html#benefits" class="nav-link">Benefits</a></li>
+                <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="about-us.html" class="nav-link active">About</a></li>
+            </ul>
+            
+            <div class="header-buttons">
+                <a href="./login.html" class="btn btn-secondary">Log In</a>
+                <a href="./signup.html" class="btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Meet Our Team</h1>
+            <p class="sub-headline">The passionate people behind PairaLife's mission to transform shared living</p>
+        </div>
+    </section>
+    
+    <!-- Team Intro -->
+    <section class="team-intro">
+        <div class="container">
+            <div class="team-intro-content">
+                <h2>Who We Are</h2>
+                <p>At PairaLife, our team brings together diverse expertise across technology, real estate, social services, and community building. We're united by a commitment to create innovative housing solutions that foster connection across generations.</p>
+                <p>Each team member contributes unique perspectives and skills, but we all share a passion for transforming how people think about shared living arrangements and intergenerational connections.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Leadership Team -->
+    <section class="leadership">
+        <div class="container">
+            <div class="leadership-header">
+                <h2>Leadership Team</h2>
+                <p>Meet the visionaries leading PairaLife's mission</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="Sarah Johnson" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Sarah Johnson</h3>
+                        <div class="team-role">Co-Founder & CEO</div>
+                        <p class="team-bio">With a background in urban planning and a decade of experience in senior housing, Sarah leads PairaLife's strategic vision and operations.</p>
+                        <div class="team-social">
+                            <a href="#" class="team-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="team-social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="David Chen" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">David Chen</h3>
+                        <div class="team-role">Co-Founder & CTO</div>
+                        <p class="team-bio">A tech entrepreneur with previous successful startups, David leads our technology development and matching algorithm innovation.</p>
+                        <div class="team-social">
+                            <a href="#" class="team-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="team-social-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Maya Rodriguez" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Maya Rodriguez</h3>
+                        <div class="team-role">Chief Community Officer</div>
+                        <p class="team-bio">With experience in social work and community building, Maya focuses on creating safe, supportive communities through our platform.</p>
+                        <div class="team-social">
+                            <a href="#" class="team-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="team-social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80" alt="Robert Thompson" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Robert Thompson</h3>
+                        <div class="team-role">Chief Financial Officer</div>
+                        <p class="team-bio">With 15 years in real estate finance, Robert oversees PairaLife's financial operations and investor relations.</p>
+                        <div class="team-social">
+                            <a href="#" class="team-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="team-social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Members -->
+    <section class="team-members">
+        <div class="container">
+            <div class="leadership-header">
+                <h2>Our Team</h2>
+                <p>The talented individuals who make PairaLife's mission possible every day</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Jessica Kim" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Jessica Kim</h3>
+                        <div class="team-role">Head of Product</div>
+                        <p class="team-bio">Jessica leads our product development, ensuring the platform meets the needs of all users regardless of age or background.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Marcus Williams" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Marcus Williams</h3>
+                        <div class="team-role">Senior Developer</div>
+                        <p class="team-bio">Marcus brings expertise in platform security and works to ensure all user data and communications remain private and protected.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Olivia Patel" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Olivia Patel</h3>
+                        <div class="team-role">UX/UI Designer</div>
+                        <p class="team-bio">Olivia ensures our platform is intuitive and accessible for users of all ages, with a focus on simplicity and clarity.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Thomas Garcia" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Thomas Garcia</h3>
+                        <div class="team-role">Community Manager</div>
+                        <p class="team-bio">Thomas works directly with our user community, gathering feedback and ensuring successful matching outcomes.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Sophia Lee" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">Sophia Lee</h3>
+                        <div class="team-role">Marketing Director</div>
+                        <p class="team-bio">Sophia leads our outreach efforts, focusing on education about co-living benefits and building our user community.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1530268729831-4b0b9e170218?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="James Wilson" class="team-photo">
+                    <div class="team-info">
+                        <h3 class="team-name">James Wilson</h3>
+                        <div class="team-role">Partnerships Lead</div>
+                        <p class="team-bio">James works with organizations serving both seniors and young adults, building partnerships that expand our platform's reach.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Join Our Team -->
+    <section class="join-team">
+        <div class="container">
+            <h2>Join Our Team</h2>
+            <p>We're always looking for talented individuals who share our passion for reimagining housing and fostering intergenerational connections.</p>
+            <a href="#" class="btn jobs-btn">View Open Positions</a>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Find Your Co-Living Match?</h2>
+                <p>Join the PairaLife community today and discover how shared living can offer companionship, affordability, and a richer life experience.</p>
+                <a href="./signup.html" class="btn btn-large cta-button">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="team.html">Team</a></li>
+                        <li class="footer-link"><a href="press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification - PairaLife</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Primary Colors */
+            --paira-blue: #1E6B8C;
+            --paira-teal: #2BB5B0;
+            --warm-beige: #F5EFE6;
+            
+            /* Secondary Colors */
+            --sunset-orange: #F7934C;
+            --sage-green: #7DB37D;
+            --warm-gray: #625D5D;
+            
+            /* Neutrals */
+            --light-gray: #E8E8E8;
+            --off-white: #FAFAFA;
+            
+            /* Functional Colors */
+            --success-green: #4CAF50;
+            --warning-yellow: #FFB400;
+            --error-red: #E53935;
+            --info-blue: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--warm-gray);
+            background-color: var(--off-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--paira-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--paira-teal);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--paira-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            min-height: 48px;
+        }
+        
+        .btn:hover {
+            background-color: #18546E;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--paira-blue);
+            border: 1px solid var(--paira-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #E6F0F5;
+        }
+        
+        .btn-success {
+            background-color: var(--success-green);
+        }
+        
+        .btn-success:hover {
+            background-color: #3d8b40;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-yellow);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a000;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--paira-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        
+        .logo span {
+            color: var(--paira-teal);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--paira-blue);
+        }
+        
+        .nav-link.active {
+            color: var(--paira-teal);
+        }
+        
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-link a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+        
+        /* Verification Page */
+        .verification-section {
+            padding: 2rem 0;
+            background-color: white;
+        }
+        
+        .verification-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--warm-gray);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            gap: 0.75rem;
+        }
+        
+        .sidebar-link:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .sidebar-link.active {
+            background-color: var(--paira-blue);
+            color: white;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .verification-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .verification-step {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .verification-step:hover {
+            border-color: var(--paira-teal);
+        }
+        
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(43, 181, 176, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--paira-teal);
+            font-size: 1.25rem;
+        }
+        
+        .step-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .step-pending {
+            background-color: rgba(255, 180, 0, 0.1);
+            color: var(--warning-yellow);
+        }
+        
+        .step-completed {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-green);
+        }
+        
+        .step-required {
+            background-color: rgba(229, 57, 53, 0.1);
+            color: var(--error-red);
+        }
+        
+        .step-description {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-bar-container {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--paira-teal);
+            border-radius: 4px;
+            width: 33%;
+        }
+        
+        .progress-label {
+            text-align: right;
+            font-size: 0.875rem;
+            color: var(--paira-teal);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .id-upload {
+            border: 2px dashed var(--light-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .id-upload:hover {
+            border-color: var(--paira-teal);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--paira-teal);
+            margin-bottom: 1rem;
+        }
+        
+        .id-types {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .id-type {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .id-type:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .id-type.selected {
+            background-color: rgba(43, 181, 176, 0.1);
+            border-color: var(--paira-teal);
+        }
+        
+        .uploaded-preview {
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        .uploaded-preview.visible {
+            display: block;
+        }
+        
+        .preview-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-image {
+            flex: 1;
+            height: 200px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--paira-blue);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--paira-teal);
+            box-shadow: 0 0 0 2px rgba(43, 181, 176, 0.2);
+        }
+        
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--warm-gray);
+            margin-top: 0.5rem;
+        }
+        
+        .verification-note {
+            background-color: rgba(33, 150, 243, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--info-blue);
+        }
+        
+        .verification-note p {
+            margin-bottom: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .verification-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .preview-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .user-menu {
+                margin-top: 1rem;
+            }
+            
+            .verification-card {
+                padding: 1.5rem;
+            }
+            
+            .id-types {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/50x50/2BB5B0/FFFFFF?text=PL" alt="PairaLife Logo">
+                <span>Paira</span>Life
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Find a Match</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Messages</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Listing</a></li>
+            </ul>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                </div>
+                <span>John Doe</span>
+                <i class="fas fa-chevron-down"></i>
+                
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="account-settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help & Support</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Verification Section -->
+    <section class="verification-section">
+        <div class="container verification-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="dashboard.html" class="sidebar-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="profile-creation.html" class="sidebar-link">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="verification.html" class="sidebar-link active">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Verification</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="account-settings.html" class="sidebar-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <h1>Account Verification</h1>
+                <p>Complete the verification steps below to gain full access to PairaLife's features and build trust within our community.</p>
+                
+                <div class="progress-label">33% Complete</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill"></div>
+                </div>
+                
+                <div class="verification-card">
+                    <div class="verification-step">
+                        <div class="step-header">
+                            <div class="step-title">
+                                <div class="step-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h3>Email Verification</h3>
+                            </div>
+                            <span class="step-status step-completed">Completed</span>
+                        </div>
+                        <p class="step-description">Your email address has been successfully verified.</p>
+                    </div>
+                    
+                    <div class="verification-step">
+                        <div class="step-header">
+                            <div class="step-title">
+                                <div class="step-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <h3>ID Verification</h3>
+                            </div>
+                            <span class="step-status step-required">Required</span>
+                        </div>
+                        <p class="step-description">Upload a government-issued ID to verify your identity. This helps ensure everyone in our community is who they say they are.</p>
+                        
+                        <div class="id-types">
+                            <div class="id-type selected">
+                                <input type="radio" id="driver-license" name="id-type" checked>
+                                <label for="driver-license">Driver's License</label>
+                            </div>
+                            <div class="id-type">
+                                <input type="radio" id="passport" name="id-type">
+                                <label for="passport">Passport</label>
+                            </div>
+                            <div class="id-type">
+                                <input type="radio" id="national-id" name="id-type">
+                                <label for="national-id">National ID Card</label>
+                            </div>
+                        </div>
+                        
+                        <div class="id-upload">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h4>Upload ID Images</h4>
+                            <p>Please upload clear photos of the front and back of your ID</p>
+                            <button class="btn" id="uploadButton">Choose Files</button>
+                        </div>
+                        
+                        <div class="uploaded-preview" id="uploadedPreview">
+                            <h4>Uploaded Images</h4>
+                            <div class="preview-container">
+                                <div class="preview-image">
+                                    <img src="https://via.placeholder.com/400x250" alt="ID Front">
+                                </div>
+                                <div class="preview-image">
+                                    <img src="https://via.placeholder.com/400x250" alt="ID Back">
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary">Remove Images</button>
+                        </div>
+                        
+                        <div class="verification-note">
+                            <p><strong>Note:</strong> Your ID information is encrypted and securely stored. It will only be used for verification purposes and will not be visible to other users.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="verification-step">
+                        <div class="step-header">
+                            <div class="step-title">
+                                <div class="step-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3>Phone Verification</h3>
+                            </div>
+                            <span class="step-status step-pending">Pending</span>
+                        </div>
+                        <p class="step-description">Verify your phone number to enable additional security features and communication options.</p>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number">
+                            <p class="form-hint">We'll send a verification code to this number</p>
+                        </div>
+                        
+                        <button class="btn">Send Verification Code</button>
+                    </div>
+                    
+                    <div class="verification-step">
+                        <div class="step-header">
+                            <div class="step-title">
+                                <div class="step-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <h3>Background Check</h3>
+                            </div>
+                            <span class="step-status step-pending">Optional</span>
+                        </div>
+                        <p class="step-description">Complete an optional background check to increase trust and unlock "Verified Plus" status.</p>
+                        <p>This additional step provides extra peace of mind for potential co-living matches.</p>
+                        <button class="btn btn-secondary">Start Background Check</button>
+                    </div>
+                </div>
+                
+                <div class="verification-card">
+                    <h3>Why Verification Matters</h3>
+                    <p>At PairaLife, we're committed to creating a safe, trustworthy community. Our verification process helps:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li>Prevent fraud and protect all community members</li>
+                        <li>Build trust between potential co-living matches</li>
+                        <li>Create a secure environment for everyone</li>
+                        <li>Enable access to all platform features</li>
+                    </ul>
+                    <div class="verification-note">
+                        <p><strong>Privacy Commitment:</strong> All verification information is securely encrypted and stored. We never share your personal documents with other users or third parties except as required by law.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4 class="footer-heading">PairaLife</h4>
+                    <p>Connecting lives, sharing spaces - find your perfect co-living match with PairaLife.com.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./browse-listings.html">Find a Home</a></li>
+                        <li class="footer-link"><a href="./create-listing.html">List Your Space</a></li>
+                        <li class="footer-link"><a href="how-it-works/index.html">How It Works</a></li>
+                        <li class="footer-link"><a href="./dashboard.html">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="about/about-us.html">About Us</a></li>
+                        <li class="footer-link"><a href="about/our-story.html">Our Story</a></li>
+                        <li class="footer-link"><a href="about/team.html">Team</a></li>
+                        <li class="footer-link"><a href="about/press.html">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="./help-center.html">Help Center</a></li>
+                        <li class="footer-link"><a href="./safety-center.html">Safety Center</a></li>
+                        <li class="footer-link"><a href="./help-center.html#resources">Resources</a></li>
+                        <li class="footer-link"><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PairaLife. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // User dropdown toggle
+        const userMenu = document.getElementById('userMenu');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function() {
+            userDropdown.classList.remove('active');
+        });
+        
+        // Upload button functionality
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadedPreview = document.getElementById('uploadedPreview');
+        
+        uploadButton.addEventListener('click', function() {
+            // This would typically trigger a file input dialog
+            // For the mockup, we'll just show the preview
+            uploadedPreview.classList.add('visible');
+        });
+        
+        // ID type selection
+        const idTypes = document.querySelectorAll('.id-type');
+        
+        idTypes.forEach(type => {
+            type.addEventListener('click', function() {
+                // Remove selected class from all types
+                idTypes.forEach(t => t.classList.remove('selected'));
+                
+                // Add selected class to clicked type
+                this.classList.add('selected');
+                
+                // Find the radio input and check it
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+    </script>
+</body>
+</html> 
