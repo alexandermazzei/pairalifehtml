@@ -108,6 +108,7 @@
             background-color: #E6F0F5;
         }
         
+<<<<<<< HEAD
         .btn-danger {
             background-color: var(--error-red);
         }
@@ -122,6 +123,8 @@
             border-radius: 8px;
         }
         
+=======
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0
         /* Header */
         header {
             background-color: white;
@@ -147,12 +150,15 @@
             align-items: center;
         }
         
+<<<<<<< HEAD
         .logo img {
             height: 40px;
             margin-right: 10px;
             border-radius: 0;
         }
         
+=======
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0
         .logo span {
             color: var(--paira-teal);
         }
@@ -181,6 +187,7 @@
             color: var(--paira-teal);
         }
         
+<<<<<<< HEAD
         .user-menu {
             position: relative;
             display: flex;
@@ -396,6 +403,15 @@
         
         .profile-card-header h3 {
             margin-bottom: 0;
+=======
+        /* Form Styles */
+        .form-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin: 2rem 0;
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0
         }
         
         .form-group {
@@ -406,11 +422,16 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+<<<<<<< HEAD
             color: var(--paira-blue);
+=======
+            color: var(--warm-gray);
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0
         }
         
         .form-input {
             width: 100%;
+<<<<<<< HEAD
             padding: 0.75rem 1rem;
             border: 1px solid var(--light-gray);
             border-radius: 4px;
@@ -421,11 +442,20 @@
         textarea.form-input {
             resize: vertical;
             min-height: 100px;
+=======
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0
         }
         
         .form-input:focus {
             outline: none;
             border-color: var(--paira-teal);
+<<<<<<< HEAD
             box-shadow: 0 0 0 2px rgba(43, 181, 176, 0.2);
         }
         
@@ -1079,3 +1109,97 @@
     </script>
 </body>
 </html> 
+=======
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        footer {
+            background-color: var(--warm-gray);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        footer a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div>Paira<span>Life</span></div>
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="signup.html" class="nav-link">Sign Up</a></li>
+                    <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Edit Your Profile</h1>
+        <p>Update your personal information and preferences below.</p>
+        
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-input" value="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" value="john.doe@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" value="(555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea id="bio" name="bio" class="form-input" rows="4">I'm a friendly homeowner looking to share my space with compatible roommates.</textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+                    <button type="button" onclick="window.location.href='dashboard.html'" class="btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PairaLife. All rights reserved.</p>
+            <p>
+                <a href="index.html">Home</a> | 
+                <a href="login.html">Login</a> | 
+                <a href="signup.html">Sign Up</a> | 
+                <a href="dashboard.html">Dashboard</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
+>>>>>>> 304c069b9e84abf28ab4d89f2043d38ac44c85d0

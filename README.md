@@ -1,6 +1,19 @@
 # PairaLife Website
 
-This is a static HTML website for PairaLife, a platform connecting homeowners with people looking for housing.
+This is a static HTML website for PairaLife, a platform connecting homeowners with people looking for housing through compatible living arrangements.
+
+## Live Preview
+
+These templates are available for preview via GitHub Pages at:
+https://alexandermazzei.github.io/pairalifehtml/
+
+## Pages Available
+
+- [Home Page](index.html)
+- [Sign Up](signup.html)
+- [Login](login.html)
+- [Dashboard](dashboard.html)
+- More pages available in the repository
 
 ## Structure
 
@@ -19,7 +32,10 @@ The website consists of the following main sections:
 
 ## Quick Start
 
-To view the website locally, open `index.html` in your browser.
+To view the website locally, open `index.html` in your browser or run a simple HTTP server:
+```
+python -m http.server 8000
+```
 
 ## Deployment
 
@@ -29,7 +45,7 @@ This site is designed to be deployed to GitHub Pages. Follow these steps:
 2. Push all the files to the repository
 3. Go to the repository settings
 4. Scroll down to the GitHub Pages section
-5. Select the branch you want to deploy (usually `main`)
+5. Select the branch you want to deploy (usually `main` or `gh-pages`)
 6. Click Save
 
 The site will be available at `https://[username].github.io/[repository]`.
@@ -42,6 +58,6 @@ The site will be available at `https://[username].github.io/[repository]`.
 - `/how-it-works/`: How It Works section pages
 - `/assets/`: Images and other static assets
 
-## Contact
+## About This Project
 
-For questions or feedback, please contact [your contact information]. 
+This is a collection of static HTML templates for the PairaLife platform. These templates showcase the UI design and user flow for the platform.
